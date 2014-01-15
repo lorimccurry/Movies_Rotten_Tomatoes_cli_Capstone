@@ -1,27 +1,29 @@
 # User Stories
 
 ## Feature 1: Build your own movie tracker library
-
+<pre>
   * As a movie tracker
     In order to track movies I've seen in the theater, own,
     or want to for either
     I want to be able to log and categorize a collection of
     my movies and theater movies.
-    *Acceptance criteria:
-      *A user can attach their name to an entry
-      *A user can enter or select a movie title
-      *A user can enter they've seen or not seen a movie
-      *A user can enter they own or don't own a movie
-      *A user can enter if they want to see or own a movie
-      *A user can leave any of these fields blank
-      *Limit user to select database list of movies
+
+     Acceptance criteria:
+      A user can attach their name to an entry
+      A user can enter or select a movie title
+      A user can enter they've seen or not seen a movie
+      A user can enter they own or don't own a movie
+      A user can enter if they want to see or own a movie
+      A user can leave any of these fields blank
+      Limit user to select database list of movies
 
   * As a movie recommender
     In order to give advice based on movies I've seen
     I want to be able to rate movies
-    *Acceptance criteria:
-      *A user can enter a numeric movie rating
-      *A user can leave this field blank
+
+     Acceptance criteria:
+       A user can enter a numeric movie rating
+       A user can leave this field blank
 
 
 ## Feature 2: View tracker library and sort/search data
@@ -29,9 +31,9 @@
   * As a movie glutton
     In order to keep track of the number of movies I've seen
     I want to see a total count of movies I've viewed.
-    *Acceptance criteria:
-      *Filters by name
-      *Prints total movies viewed
+      Acceptance criteria:
+       Filters by name
+       Prints total movies viewed
 
   * As a new-movie consumer
     In order to be able to target movies I want to see or own
@@ -75,5 +77,4 @@
       *Show difference between user and RT ratings by movie
       *Show difference between user and RT ratings overall
       *Will not show differences for movies that have not been rated
-
-
+</pre>
