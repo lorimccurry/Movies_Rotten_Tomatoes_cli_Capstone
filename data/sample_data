@@ -1,0 +1,39 @@
+Eliza - it appears the movies can be queried one at a time for general ratings information. I am
+working to see if there is a way to get more than one movie at a time.
+
+Movie Info
+Detailed information on a specific movie specified by Id. You can use the movies search endpoint or peruse the lists of movies/dvds to get the urls to movies.
+
+URL
+http://api.rottentomatoes.com/api/public/v1.0/movies/770672122.json?apikey=[your_api_key]
+
+Parameters
+no parameters
+
+Example Call and Response
+http://api.rottentomatoes.com/api/public/v1.0/movies/770672122.json?apikey=[your_api_key]
+
+view sourceprint?
+{
+  "id": 770672122,
+  "title": "Toy Story 3",
+  "year": 2010,
+  "genres": [
+  "Animation",
+  "Kids & Family",
+    "Science Fiction & Fantasy",
+    "Comedy"
+  ],
+  "mpaa_rating": "G",
+  "runtime": 103,
+  "critics_consensus": "Deftly blending comedy, adventure, and honest emotion, Toy Story 3 is a rare second sequel that really works.",
+  "release_dates": {
+    "theater": "2010-06-18",
+    "dvd": "2010-11-02"
+  },
+  "ratings": {
+    "critics_rating": "Certified Fresh",
+    "critics_score": 99,
+    "audience_rating": "Upright",
+    "audience_score": 91
+  },
