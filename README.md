@@ -1,4 +1,4 @@
-Movie_Rotten_Tomates_cli
+Movie_Rotten_Tomatoes_cli
 ==============
 
 ## Elevator Pitch
