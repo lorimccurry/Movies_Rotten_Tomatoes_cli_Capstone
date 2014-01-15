@@ -25,7 +25,7 @@ suck or don't suck compared to Rotten Tomatoes ratings.
 An average Rotten Tomatoes score taken for movies w/ 3 stars or better to determine
 if user has rotten taste.
 
-## Data Source:
+## Data Sources:
 
-rottentomatoes.com
-cinephile personal collection and viewing history
+   * rottentomatoes.com
+   * cinephile personal collection and viewing history
