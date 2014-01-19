@@ -24,4 +24,4 @@
   * RT critic number rating
   * RT audience number rating
   * RT critic tomatometer: fresh/rotten
-  * TR audience meter: like/dislike
+  * RT audience meter: like/dislike
