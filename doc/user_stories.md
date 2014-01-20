@@ -6,16 +6,17 @@ As a movie tracker
 In order to create a library of my movies
 I want to be able to enter a new movie to my movie tracker
 
-Usage: ./movies add_movie "Title"
+Usage: ./movies add_movie -t "Title" -s "t/f" -o "t/f" -ws "t/f" -wo "t/f" -r num
 
 Acceptance criteria:
-* Asks for a movie title
+* User enters title and appropriate flags preceding necessary data
+  * -t : Title
+  * -s : Seen?
+  * -o : Own?
+  * -ws : Wishlist see?
+  * -wo : Wishlist own?
+  * -r : Rating number
 * A user is limited to select database list of movies
-* Prints a series of questions about the movie
-  -Seen?
-  -Own?
-  -Wishlist?
-  -Rating?
 * Shows user responses at end of data input and asks for confirmation
 </pre>
 ###2: View tracker library and sort/search data
@@ -103,14 +104,21 @@ Acceptance criteria:
 ### 3: Updating movies from the database
 <pre>
 As a movie tracker
-In order to keep my libray current
+In order to keep my library current
 I want to be able to edit a movie field
 
 Usage: ./movies edit_movie "Title"
 
 Acceptance criteria:
 * User enters movie title for edit
-* Prints current movie record and prompts which field for edit
+* Prints current movie record and prompts user for which field(s) for edit
+* User enters appropriate flags preceding new data to replace existing values
+  * -t : Title
+  * -s : Seen?
+  * -o : Own?
+  * -ws : Wishlist see?
+  * -wo : Wishlist own?
+  * -r : Rating number
 </pre>
 
 ###4: Deleting movies from the database
