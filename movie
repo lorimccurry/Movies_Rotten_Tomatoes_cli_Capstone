@@ -1,3 +1,33 @@
 #!/usr/bin/env ruby
 
-puts 'You must provide the movie title you are adding'
+require 'optparse'
+
+
+
+command = ARGV[0]
+arguments = ARGV.drop(1)
+
+if arguments.empty?
+ puts "You must provide the movie title you are adding"
+else
+ missing_things = []
+ unless arguments.include?("-t")
+  missing_things << "title"
+ end
+ unless arguments.include?("-s")
+  missing_things << "seen?"
+ end
+ unless arguments.include?("-o")
+  missing_things << "own?"
+ end
+ unless arguments.include?("-ws")
+  missing_things << "wishlist seen"
+ end
+ unless arguments.include?("-wo")
+  missing_things << "wishlist own"
+ end
+ unless arguments.include?("-r")
+  missing_things << "rating"
+ end
+ puts "You must provide the #{missing_things.join(" and ")} of the movie you are adding"
+end
