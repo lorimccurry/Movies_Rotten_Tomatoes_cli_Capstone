@@ -23,3 +23,4 @@
   * Own?
   * Wishlist see?
   * Wishlist own?
+  * Cinephile rating
