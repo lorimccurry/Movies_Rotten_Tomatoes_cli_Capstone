@@ -6,7 +6,7 @@ As a movie tracker
 In order to create a library of my movies
 I want to be able to enter a new movie to my movie tracker
 
-Usage: ./movies add_movie -t "Title" -s "t/f" -o "t/f" -ws "t/f" -wo "t/f" -r num
+Usage: ./movies add -t "Title" -s "t/f" -o "t/f" -ws "t/f" -wo "t/f" -r num
 
 Acceptance criteria:
 * User enters title and appropriate flags preceding necessary data
@@ -25,7 +25,7 @@ As a movie tracker
 In order to view the movies in my library
 I want to be able to query a movie and existing information on it
 
-Usage: ./movies view_movie "Title"
+Usage: ./movies view "Title"
 
 Acceptance criteria:
 * User can query for a specific movie
@@ -36,7 +36,7 @@ As a movie glutton
 In order to keep track of the number of movies I've seen
 I want to see a total count of movies I've viewed.
 
-Usage: ./movies movie_count
+Usage: ./movies count
 
 Acceptance criteria:
 * User can query for total movies seen
@@ -47,7 +47,7 @@ As a new-movie consumer
 In order to be able to target movies I want to see in theaters or on DVD
 I want to to be able to view a list of the movies on my wish-list.
 
-Usage: ./movies wish_list_movies
+Usage: ./movies wish_list
 
 Acceptance criteria:
 * User can query for wish list
@@ -60,7 +60,7 @@ As a movie lender
 In order to be able to view what movies I own
 I want to be able to view a list of my owned movie library.
 
-Usage: ./movies owned_movies
+Usage: ./movies owned
 
 Acceptance criteria:
 * User can query owned movies
@@ -82,7 +82,7 @@ As a researcher of opinions of movie critics and other movie goers
 In order to decide if a movie is one I want to see
 I want to be able to view Rotten Tomatoes critic and user ratings.
 
-Usage: ./movies rt_ratings "Title"
+Usage: ./movies rt_rating "Title"
 
 Acceptance criteria:
 * User can query a movie for RT ratings
@@ -107,7 +107,7 @@ As a movie tracker
 In order to keep my library current
 I want to be able to edit a movie field
 
-Usage: ./movies edit_movie "Title"
+Usage: ./movies edit "Title"
 
 Acceptance criteria:
 * User enters movie title for edit
@@ -127,7 +127,7 @@ As a movie tracker
 In order to remove movies from my library
 I want to be able to delete a movie in my library
 
-Usage: ./movies delete_movie "Title"
+Usage: ./movies delete "Title"
 
 Acceptance criteria:
 * User enters movie title to be deleted
