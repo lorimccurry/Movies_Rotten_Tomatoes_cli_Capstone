@@ -1,9 +1,15 @@
-require_relative "helper"
+require_relative 'helper'
+require 'sqlite3'
 
-class TestEnteringMovie < MiniTest::Unit::TestCase
+class TestEnteringMovies < MovieTest
   def test_01_valid_movie_gets_saved
-    skip "needs implementation"
-    assert false, "Missing test implementation"
+    `./movie add 'Good Will Hunting' -s t -o t --ws f --wo f -r 100`
+    results = database.execute("select title, seen, own, wishlist_see, wishlist_own, user_rating from cinephile_movies_test")
+    expected = ["Good Will Hunting", "t", "t", "f", "f", 100]
+    assert_equal expected, results[0]
+
+    result = database.execute("select count(id) from cinephile_movies_test")
+    assert_equal 1, result[0][0]
   end
 
   def test_02_invalid_movie_doesnt_get_saved
@@ -49,7 +55,7 @@ class TestEnteringMovie < MiniTest::Unit::TestCase
 
   def test_09_valid_movie_information_gets_printed
     command = "./movie add 'American Hustle' -s t -o f --ws f --wo t -r 80"
-    expected = "Theoretically creating: a movie named American Hustle, with seen? t, own? f, wishlist see f, wishlist own t, rating 80"
+    expected = "A movie named American Hustle, with seen? t, own? f, wishlist see f, wishlist own t, rating 80"
     assert_command_output expected, command
   end
 end
