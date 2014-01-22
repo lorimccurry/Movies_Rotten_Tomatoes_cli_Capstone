@@ -3,15 +3,12 @@
 require 'optparse'
 
 command = ARGV[0]
-#title = ARGV[1]
+title = ARGV[1]
 options = {}
 
 OptionParser.new do |opts|
   opts.banner = "Usage: movie [command] [options]"
 
-  opts.on("-t [TITLE]", "The title?") do |title|
-    options[:title] = title
-  end
   opts.on("-s [SEEN]", "Movie seen?") do |seen|
     options[:seen] = seen
   end
@@ -29,13 +26,12 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-# if title.nil? or title.empty?
-#  puts "You must provide the movie title you are adding"
-#  exit
-# end
+if title.nil? or title.empty?
+ puts "You must provide the movie title you are adding"
+ exit
+end
 
  missing_things = []
- missing_things << "title" unless options[:title]
  missing_things << "seen?" unless options[:seen]
  missing_things << "own?" unless options[:own]
  missing_things << "wishlist see" unless options[:wishlist_see]
@@ -46,4 +42,4 @@ end.parse!
   exit
  end
 
- puts "Theoretically creating: a movie named #{options[:title]}, with seen? #{options[:seen]}, own? #{options[:own]}, wishlist see #{options[:wishlist_see]}, wishlist own #{options[:wishlist_own]}, rating #{options[:rating]}"
+ puts "Theoretically creating: a movie named #{title}, with seen? #{options[:seen]}, own? #{options[:own]}, wishlist see #{options[:wishlist_see]}, wishlist own #{options[:wishlist_own]}, rating #{options[:rating]}"
