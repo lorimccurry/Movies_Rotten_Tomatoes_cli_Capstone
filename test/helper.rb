@@ -2,7 +2,7 @@ require 'minitest/autorun'
 
 class MovieTest < Minitest::Unit::TestCase
   def database
-    @database ||= SQLite3::Database.new("movie_test")
+    @database ||= SQLite3::Database.new("db/movie_test.sqlite3")
   end
 
   def assert_command_output expected, command
