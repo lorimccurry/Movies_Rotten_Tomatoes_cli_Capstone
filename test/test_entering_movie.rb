@@ -13,8 +13,9 @@ class TestEnteringMovies < MovieTest
   end
 
   def test_02_invalid_movie_doesnt_get_saved
-    skip "needs implementation"
-    assert false, "Missing test implementation"
+    `./movie add 'Good Will Hunting' -s t -o t --ws f --wo f -r 100`
+    result = database.execute("select count(id) from cinephile_movies_test")
+    assert_equal 0, result[0][0]
   end
 
   def test_03_error_message_for_missing_title
