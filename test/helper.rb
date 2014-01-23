@@ -1,8 +1,9 @@
 require 'minitest/autorun'
+require_relative '../lib/environment'
 
 class MovieTest < Minitest::Unit::TestCase
   def database
-    @database ||= SQLite3::Database.new("db/movie_test.sqlite3")
+    Environment.database_connection
   end
 
   def assert_command_output expected, command
