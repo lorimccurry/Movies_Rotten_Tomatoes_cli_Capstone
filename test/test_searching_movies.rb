@@ -8,7 +8,7 @@ class TestSearchingMovies < MovieTest
     `./movie add 'Erin Brockovich' -s t -o f --ws f --wo t -r 85 --environment test`
 
     shell_output = ""
-    IO.popen('./movie search', 'r+') do |pipe|
+    IO.popen('./movie search --environment test', 'r+') do |pipe|
       pipe.puts("Good")
       pipe.close_write
       shell_output = pipe.read

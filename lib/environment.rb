@@ -1,3 +1,5 @@
+require 'sqlite3'
+
 class Environment
   def self.database_connection(environment = "production")
     # memoization
