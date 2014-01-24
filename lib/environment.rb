@@ -1,8 +1,17 @@
-require 'sqlite3'
+require_relative 'database'
+require 'logger'
 
 class Environment
   def self.database_connection(environment = "production")
-    # memoization
-    @connection ||= SQLite3::Database.new("db/movie_#{environment}.sqlite3")
+    Database.connection(@@environment)
   end
+
+  def self.environment= environment
+    @@environment = environment
+  end
+
+  def self.logger
+    @@logger ||= Logger.new("logs/#{@@environment}.log")
+  end
+
 end
