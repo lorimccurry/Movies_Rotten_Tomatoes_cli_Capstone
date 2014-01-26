@@ -56,7 +56,7 @@ class TestEnteringMovies < MovieTest
 
   def test_09_valid_movie_information_gets_printed
     command = "./movie add 'American Hustle' -s t -o f --ws f --wo t -r 80"
-    expected = "A movie named American Hustle, with seen? t, own? f, wishlist see f, wishlist own t, rating 80"
+    expected = "A movie named American Hustle, with seen? t, own? f, wishlist see f, wishlist own t, user rating 80"
     assert_command_output expected, command
   end
 end

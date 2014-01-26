@@ -18,8 +18,8 @@ class ParseArguments
       opts.on("--wo [WISHLIST_OWN]", "Wishlist own?") do |wishlist_own|
         options[:wishlist_own] = wishlist_own
       end
-      opts.on("-r [RATING]", "The Rating") do |rating|
-        options[:rating] = rating
+      opts.on("-r [USER_RATING]", "The Rating") do |rating|
+        options[:user_rating] = rating
       end
       opts.on("--environment [ENV]", "The database environment") do |env|
         options[:environment] = env
@@ -39,7 +39,7 @@ class ParseArguments
     missing_things << "own?" unless options[:own]
     missing_things << "wishlist see" unless options[:wishlist_see]
     missing_things << "wishlist own" unless options[:wishlist_own]
-    missing_things << "user rating" unless options[:rating]
+    missing_things << "user rating" unless options[:user_rating]
     unless missing_things.empty?
       errors << "You must provide the #{missing_things.join(" and ")} of the movie you are adding"
     end
