@@ -1,0 +1,9 @@
+# Logfile created on 2014-01-24 14:24:44 -0600 by logger.rb/36483
+I, [2014-01-24T14:24:44.936219 #10980]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Good Will Hunting', 't', 't', 'f', 'f', '100')
+I, [2014-01-24T15:07:23.159805 #11145]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Good Will Hunting', 't', 't', 'f', 'f', '100')
+I, [2014-01-24T15:14:05.885077 #11308]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Good Will Hunting', 't', 't', 'f', 'f', '100')
+I, [2014-01-24T15:34:37.263982 #11520]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Good Will Hunting', 't', 't', 'f', 'f', '100')
+I, [2014-01-24T15:46:05.111479 #11625]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Good Will Hunting', 't', 't', 'f', 'f', '100')
+I, [2014-01-26T12:49:42.382777 #4249]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Good Will Hunting', 't', 't', 'f', 'f', '100')
+I, [2014-01-26T12:50:50.386692 #4314]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Good Will Hunting', 't', 't', 'f', 'f', '100')
+I, [2014-01-26T12:54:36.919917 #4397]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Good Will Hunting', 't', 't', 'f', 'f', '100')

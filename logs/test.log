@@ -1,0 +1,158 @@
+# Logfile created on 2014-01-24 14:24:44 -0600 by logger.rb/36483
+I, [2014-01-24T14:24:44.733323 #10968]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Good Will Hunting', 't', 't', 'f', 'f', '100')
+I, [2014-01-24T14:24:44.739620 #10963]  INFO -- : Executing: select title, seen, own, wishlist_see, wishlist_own, user_rating from cinephile_movies_test
+I, [2014-01-24T14:24:44.740247 #10963]  INFO -- : Executing: select count(id) from cinephile_movies_test
+I, [2014-01-24T14:24:44.740407 #10963]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T14:24:44.790194 #10963]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T14:24:44.844404 #10963]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T14:24:44.890694 #10963]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T14:24:44.941513 #10963]  INFO -- : Executing: select count(id) from cinephile_movies_test
+I, [2014-01-24T14:24:44.941846 #10963]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T14:24:44.990991 #10963]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T14:24:45.036583 #10985]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('American Hustle', 't', 'f', 'f', 't', '80')
+I, [2014-01-24T14:24:45.041331 #10963]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T14:24:45.088453 #10963]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T14:24:45.141141 #10963]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T14:24:45.187131 #10994]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Good Will Hunting', 't', 't', 'f', 'f', '100')
+I, [2014-01-24T14:24:45.234383 #10997]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('A Good Year', 't', 'f', 'f', 'f', '60')
+I, [2014-01-24T14:24:45.282073 #11000]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Erin Brockovich', 't', 'f', 'f', 't', '85')
+I, [2014-01-24T14:24:45.326008 #11002]  INFO -- : Executing: select cinephile_movies_test.title from cinephile_movies_test where title LIKE '%Good'
+I, [2014-01-24T14:24:45.327899 #10963]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:07:22.837806 #11128]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('American Hustle', 't', 'f', 'f', 't', '80')
+I, [2014-01-24T15:07:22.845446 #11123]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:07:22.896925 #11123]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:07:22.951536 #11123]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:07:23.002292 #11123]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:07:23.051263 #11123]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:07:23.104806 #11123]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:07:23.166210 #11123]  INFO -- : Executing: select count(id) from cinephile_movies_test
+I, [2014-01-24T15:07:23.166704 #11123]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:07:23.218965 #11123]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:07:23.272767 #11151]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Good Will Hunting', 't', 't', 'f', 'f', '100')
+I, [2014-01-24T15:07:23.313695 #11123]  INFO -- : Executing: select title, seen, own, wishlist_see, wishlist_own, user_rating from cinephile_movies_test
+I, [2014-01-24T15:07:23.314142 #11123]  INFO -- : Executing: select count(id) from cinephile_movies_test
+I, [2014-01-24T15:07:23.314384 #11123]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:07:23.364014 #11154]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Good Will Hunting', 't', 't', 'f', 'f', '100')
+I, [2014-01-24T15:07:23.414911 #11157]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('A Good Year', 't', 'f', 'f', 'f', '60')
+I, [2014-01-24T15:07:23.463721 #11160]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Erin Brockovich', 't', 'f', 'f', 't', '85')
+I, [2014-01-24T15:07:23.511407 #11162]  INFO -- : Executing: select cinephile_movies_test.title from cinephile_movies_test where title LIKE '%Good'
+I, [2014-01-24T15:07:23.513567 #11123]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:14:05.518174 #11283]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:14:05.569846 #11291]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Good Will Hunting', 't', 't', 'f', 'f', '100')
+I, [2014-01-24T15:14:05.575609 #11283]  INFO -- : Executing: select title, seen, own, wishlist_see, wishlist_own, user_rating from cinephile_movies_test
+I, [2014-01-24T15:14:05.575952 #11283]  INFO -- : Executing: select count(id) from cinephile_movies_test
+I, [2014-01-24T15:14:05.576113 #11283]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:14:05.623479 #11294]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('American Hustle', 't', 'f', 'f', 't', '80')
+I, [2014-01-24T15:14:05.630260 #11283]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:14:05.679177 #11283]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:14:05.729563 #11283]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:14:05.779190 #11283]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:14:05.834820 #11283]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:14:05.894097 #11283]  INFO -- : Executing: select count(id) from cinephile_movies_test
+I, [2014-01-24T15:14:05.894495 #11283]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:14:05.948436 #11283]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:14:05.999749 #11314]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Good Will Hunting', 't', 't', 'f', 'f', '100')
+I, [2014-01-24T15:14:06.048619 #11317]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('A Good Year', 't', 'f', 'f', 'f', '60')
+I, [2014-01-24T15:14:06.100392 #11320]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Erin Brockovich', 't', 'f', 'f', 't', '85')
+I, [2014-01-24T15:14:06.149556 #11322]  INFO -- : Executing: select cinephile_movies_test.title from cinephile_movies_test where title LIKE '%Good'
+I, [2014-01-24T15:14:06.151661 #11283]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:34:36.828544 #11497]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Good Will Hunting', 't', 't', 'f', 'f', '100')
+I, [2014-01-24T15:34:36.836103 #11492]  INFO -- : Executing: select title, seen, own, wishlist_see, wishlist_own, user_rating from cinephile_movies_test
+I, [2014-01-24T15:34:36.836792 #11492]  INFO -- : Executing: select count(id) from cinephile_movies_test
+I, [2014-01-24T15:34:36.837007 #11492]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:34:36.890449 #11492]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:34:36.943606 #11492]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:34:36.991692 #11492]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:34:37.041584 #11492]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:34:37.095279 #11512]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('American Hustle', 't', 'f', 'f', 't', '80')
+I, [2014-01-24T15:34:37.101078 #11492]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:34:37.156217 #11492]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:34:37.209640 #11492]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:34:37.269392 #11492]  INFO -- : Executing: select count(id) from cinephile_movies_test
+I, [2014-01-24T15:34:37.269695 #11492]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:34:37.273082 #11492]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:34:37.322503 #11523]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Good Will Hunting', 't', 't', 'f', 'f', '100')
+I, [2014-01-24T15:34:37.375201 #11526]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('A Good Year', 't', 'f', 'f', 'f', '60')
+I, [2014-01-24T15:34:37.422746 #11529]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Erin Brockovich', 't', 'f', 'f', 't', '85')
+I, [2014-01-24T15:34:37.471692 #11531]  INFO -- : Executing: select cinephile_movies_test.title from cinephile_movies_test where title LIKE '%Good'
+I, [2014-01-24T15:34:37.473762 #11492]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:46:05.051330 #11622]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Good Will Hunting', 't', 't', 'f', 'f', '100')
+I, [2014-01-24T15:46:05.059671 #11617]  INFO -- : Executing: select title, seen, own, wishlist_see, wishlist_own, user_rating from cinephile_movies_test
+I, [2014-01-24T15:46:05.060341 #11617]  INFO -- : Executing: select count(id) from cinephile_movies_test
+I, [2014-01-24T15:46:05.060546 #11617]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:46:05.116917 #11617]  INFO -- : Executing: select count(id) from cinephile_movies_test
+I, [2014-01-24T15:46:05.117194 #11617]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:46:05.172660 #11617]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:46:05.222170 #11617]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:46:05.271045 #11634]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('American Hustle', 't', 'f', 'f', 't', '80')
+I, [2014-01-24T15:46:05.281074 #11617]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:46:05.330441 #11617]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:46:05.379317 #11617]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:46:05.438357 #11617]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:46:05.490291 #11617]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:46:05.494226 #11617]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-24T15:46:05.542774 #11648]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Good Will Hunting', 't', 't', 'f', 'f', '100')
+I, [2014-01-24T15:46:05.590609 #11651]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('A Good Year', 't', 'f', 'f', 'f', '60')
+I, [2014-01-24T15:46:05.642913 #11654]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Erin Brockovich', 't', 'f', 'f', 't', '85')
+I, [2014-01-24T15:46:05.693325 #11656]  INFO -- : Executing: select cinephile_movies_test.title from cinephile_movies_test where title LIKE '%Good'
+I, [2014-01-24T15:46:05.698116 #11617]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:49:42.204904 #4236]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:49:42.271536 #4236]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:49:42.319988 #4246]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('American Hustle', 't', 'f', 'f', 't', '80')
+I, [2014-01-26T12:49:42.325945 #4236]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:49:42.397951 #4236]  INFO -- : Executing: select count(id) from cinephile_movies_test
+I, [2014-01-26T12:49:42.398300 #4236]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:49:42.448247 #4252]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Good Will Hunting', 't', 't', 'f', 'f', '100')
+I, [2014-01-26T12:49:42.453937 #4236]  INFO -- : Executing: select title, seen, own, wishlist_see, wishlist_own, user_rating from cinephile_movies_test
+I, [2014-01-26T12:49:42.454275 #4236]  INFO -- : Executing: select count(id) from cinephile_movies_test
+I, [2014-01-26T12:49:42.454424 #4236]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:49:42.505513 #4236]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:49:42.553330 #4236]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:49:42.600363 #4236]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:49:42.649149 #4236]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:49:42.721342 #4236]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:49:42.767736 #4270]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Good Will Hunting', 't', 't', 'f', 'f', '100')
+I, [2014-01-26T12:49:42.813252 #4273]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('A Good Year', 't', 'f', 'f', 'f', '60')
+I, [2014-01-26T12:49:42.859503 #4276]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Erin Brockovich', 't', 'f', 'f', 't', '85')
+I, [2014-01-26T12:49:42.905407 #4278]  INFO -- : Executing: select cinephile_movies_test.title from cinephile_movies_test where title LIKE '%Good'
+I, [2014-01-26T12:49:42.907289 #4236]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:50:50.286469 #4303]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:50:50.334738 #4311]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Good Will Hunting', 't', 't', 'f', 'f', '100')
+I, [2014-01-26T12:50:50.340041 #4303]  INFO -- : Executing: select title, seen, own, wishlist_see, wishlist_own, user_rating from cinephile_movies_test
+I, [2014-01-26T12:50:50.340352 #4303]  INFO -- : Executing: select count(id) from cinephile_movies_test
+I, [2014-01-26T12:50:50.340499 #4303]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:50:50.392839 #4303]  INFO -- : Executing: select count(id) from cinephile_movies_test
+I, [2014-01-26T12:50:50.393124 #4303]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:50:50.440889 #4303]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:50:50.489819 #4320]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('American Hustle', 't', 'f', 'f', 't', '80')
+I, [2014-01-26T12:50:50.496608 #4303]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:50:50.544281 #4303]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:50:50.592757 #4303]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:50:50.641380 #4303]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:50:50.688312 #4303]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:50:50.700339 #4303]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:50:50.748439 #4337]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Good Will Hunting', 't', 't', 'f', 'f', '100')
+I, [2014-01-26T12:50:50.794592 #4340]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('A Good Year', 't', 'f', 'f', 'f', '60')
+I, [2014-01-26T12:50:50.844501 #4343]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Erin Brockovich', 't', 'f', 'f', 't', '85')
+I, [2014-01-26T12:50:50.889817 #4345]  INFO -- : Executing: select cinephile_movies_test.title from cinephile_movies_test where title LIKE '%Good'
+I, [2014-01-26T12:50:50.891685 #4303]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:54:36.769435 #4389]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Good Will Hunting', 't', 't', 'f', 'f', '100')
+I, [2014-01-26T12:54:36.775684 #4384]  INFO -- : Executing: select title, seen, own, wishlist_see, wishlist_own, user_rating from cinephile_movies_test
+I, [2014-01-26T12:54:36.776213 #4384]  INFO -- : Executing: select count(id) from cinephile_movies_test
+I, [2014-01-26T12:54:36.776377 #4384]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:54:36.824014 #4384]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:54:36.873017 #4384]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:54:36.926357 #4384]  INFO -- : Executing: select count(id) from cinephile_movies_test
+I, [2014-01-26T12:54:36.926761 #4384]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:54:36.978908 #4384]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:54:37.027392 #4384]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:54:37.074156 #4384]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:54:37.123168 #4384]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:54:37.173851 #4412]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('American Hustle', 't', 'f', 'f', 't', '80')
+I, [2014-01-26T12:54:37.178699 #4384]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:54:37.181811 #4384]  INFO -- : Executing: delete from cinephile_movies_test
+I, [2014-01-26T12:54:37.229270 #4415]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Good Will Hunting', 't', 't', 'f', 'f', '100')
+I, [2014-01-26T12:54:37.275852 #4418]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('A Good Year', 't', 'f', 'f', 'f', '60')
+I, [2014-01-26T12:54:37.321677 #4421]  INFO -- : Executing: insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('Erin Brockovich', 't', 'f', 'f', 't', '85')
+I, [2014-01-26T12:54:37.370588 #4423]  INFO -- : Executing: select cinephile_movies_test.title from cinephile_movies_test where title LIKE '%Good'
+I, [2014-01-26T12:54:37.372571 #4384]  INFO -- : Executing: delete from cinephile_movies_test
