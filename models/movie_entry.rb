@@ -11,7 +11,16 @@ class MovieEntry
   end
 
   def to_s
-    "#{title}: seen #{seen}, own #{own}, wishlist see #{wishlist_see}, wishlist own #{wishlist_own}, rating: #{rating}"
+    "#{title}: seen #{seen}, own #{own}, wishlist see #{wishlist_see}, wishlist own #{wishlist_own}, user rating: #{rating}"
+  end
+
+  def self.all
+    database = Environment.database_connection
+    database.results_as_hash = true
+    results = database.execute("select * from cinephile_movies_test order by title ASC")
+    results.map do |row_hash|
+      MovieEntry.new(title: row_hash["title"], seen: row_hash["seen"], own: row_hash["own"], wishlist_see: row_hash["wishlist_see"], wishlist_own: row_hash["wishlist_own"], rating: row_hash["user_rating"])
+    end
   end
 
   def self.add options
@@ -24,8 +33,5 @@ class MovieEntry
   end
 
   def delete
-  end
-
-  def self.all
   end
 end

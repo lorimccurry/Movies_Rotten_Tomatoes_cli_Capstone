@@ -18,7 +18,7 @@ if command == "search"
   statement = "select cinephile_movies_test.title from cinephile_movies_test where title LIKE '%#{input}'"
   results = database.execute(statement)
   puts results
-else
+elsif command == "add"
   error_messages = ParseArguments.validate(options)
   if error_messages.empty?
     # This is ripe for SQL injection attack:
@@ -28,4 +28,9 @@ else
   else
     puts error_messages
   end
+elsif command == "list"
+  puts "All Movies:"
+  puts MovieEntry.all
+else
+  puts "Command not implemented"
 end
