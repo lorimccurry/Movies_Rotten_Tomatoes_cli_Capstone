@@ -15,13 +15,13 @@ if command == "search"
   puts "What do you want to search for?"
   input = $stdin.gets.chomp
   puts "You asked for: #{input}"
-  statement = "select cinephile_movies_test.title from cinephile_movies_test where title LIKE '%#{input}%'"
+  statement = "select movie_entries.title from movie_entries where title LIKE '%#{input}%'"
   results = database.execute(statement)
   puts results
 elsif command == "add"
   error_messages = ParseArguments.validate(options)
   if error_messages.empty?
-    movie_entry = MovieEntry.new(options)
+    movie_entry = MovieEntries.new(options)
     movie_entry.save
     puts "A movie named #{movie_entry.title}, with seen? #{movie_entry.seen}, own? #{movie_entry.own}, wishlist see #{movie_entry.wishlist_see}, wishlist own #{movie_entry.wishlist_own}, user rating #{movie_entry.user_rating} was created"
   else
@@ -29,7 +29,7 @@ elsif command == "add"
   end
 elsif command == "list"
   puts "All Movies:"
-  puts MovieEntry.all
+  puts MovieEntries.all
 else
   puts "Command not implemented"
 end

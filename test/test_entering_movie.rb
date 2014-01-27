@@ -4,17 +4,17 @@ require 'sqlite3'
 class TestEnteringMovies < MovieTest
   def test_01_valid_movie_gets_saved
     `./movie add 'Good Will Hunting' -s t -o t --ws f --wo f -r 100 --environment test`
-    results = database.execute("select title, seen, own, wishlist_see, wishlist_own, user_rating from cinephile_movies_test")
+    results = database.execute("select title, seen, own, wishlist_see, wishlist_own, user_rating from movie_entries")
     expected = ["Good Will Hunting", "t", "t", "f", "f", 100]
     assert_equal expected, results[0]
 
-    result = database.execute("select count(id) from cinephile_movies_test")
+    result = database.execute("select count(id) from movie_entries")
     assert_equal 1, result[0][0]
   end
 
   def test_02_invalid_movie_doesnt_get_saved
     `./movie add 'Good Will Hunting' -s t -o t --ws f --wo f -r 100`
-    result = database.execute("select count(id) from cinephile_movies_test")
+    result = database.execute("select count(id) from movie_entries")
     assert_equal 0, result[0][0]
   end
 

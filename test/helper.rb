@@ -8,7 +8,7 @@ class MovieTest < Minitest::Unit::TestCase
   end
 
   def teardown
-    database.execute("delete from cinephile_movies_test")
+    database.execute("delete from movie_entries")
   end
 
   def assert_command_output expected, command
