@@ -21,7 +21,7 @@ if command == "search"
 elsif command == "add"
   error_messages = ParseArguments.validate(options)
   if error_messages.empty?
-    movie_entry = MovieEntry.new(title: options[:title], seen: options[:seen], own: options[:own], wishlist_see: options[:wishlist_see], wishlist_own: options[:wishlist_own], user_rating: options[:user_rating])
+    movie_entry = MovieEntry.new(options)
     movie_entry.save
     puts "A movie named #{movie_entry.title}, with seen? #{movie_entry.seen}, own? #{movie_entry.own}, wishlist see #{movie_entry.wishlist_see}, wishlist own #{movie_entry.wishlist_own}, user rating #{movie_entry.user_rating} was created"
   else

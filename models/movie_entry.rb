@@ -5,8 +5,8 @@ class MovieEntry
   attr_accessor :title, :seen, :own, :wishlist_see, :wishlist_own, :user_rating
 
   def initialize attributes = {}
-    attributes.each_pair do |attribute, value|
-      self.send("#{attribute}=", value)
+    [:title, :seen, :own, :wishlist_see, :wishlist_own, :user_rating].each do |attr|
+      self.send("#{attr}=", attributes[attr])
     end
   end
 
