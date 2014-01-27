@@ -23,6 +23,13 @@ class MovieEntry
     end
   end
 
+  def save
+    database = Environment.database_connection
+    database.execute("insert into cinephile_movies_test(title, seen, own, wishlist_see, wishlist_own, user_rating) values('#{title}', '#{seen}', '#{own}', '#{wishlist_see}', '#{wishlist_own}', '#{user_rating}')")
+    #fails silently
+    #susceptible to SQL injection
+  end
+
   def self.add options
   end
 
