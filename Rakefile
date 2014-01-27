@@ -26,5 +26,5 @@ task :test_prepare do
 end
 
 def create_tables(database_connection)
-  database_connection.execute("CREATE TABLE cinephile_movies_test (id INTEGER PRIMARY KEY AUTOINCREMENT, title varchar(100), seen integer, own integer, wishlist_see integer, wishlist_own integer, user_rating integer)")
+  database_connection.execute("CREATE TABLE movie_entries (id INTEGER PRIMARY KEY AUTOINCREMENT, title varchar(100), seen integer, own integer, wishlist_see integer, wishlist_own integer, user_rating integer)")
 end
