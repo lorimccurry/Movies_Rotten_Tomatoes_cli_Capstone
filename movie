@@ -15,7 +15,7 @@ if command == "search"
   puts "What do you want to search for?"
   input = $stdin.gets.chomp
   puts "You asked for: #{input}"
-  statement = "select cinephile_movies_test.title from cinephile_movies_test where title LIKE '%#{input}'"
+  statement = "select cinephile_movies_test.title from cinephile_movies_test where title LIKE '%#{input}%'"
   results = database.execute(statement)
   puts results
 elsif command == "add"
