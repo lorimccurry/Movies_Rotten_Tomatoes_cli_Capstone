@@ -3,26 +3,31 @@
 require_relative 'lib/environment'
 require_relative 'lib/parse_arguments'
 require_relative 'models/movie_entries'
+require_relative 'lib/interactions'
 
 #Router
 class Movie
+  include Interactions
+  attr_reader :options
+
+  def initialize
+    @options = ParseArguments.parse
+    @options[:title] ||= ARGV[1]
+    @options[:command] = ARGV[0]
+    Environment.environment = @options[:environment] || "production"
+  end
 
   def main
-    command = ARGV[0]
-    options = ParseArguments.parse
-    options[:title] ||= ARGV[1]
-
-    Environment.environment = options[:environment] || "production"
     database = Environment.database_connection
 
-    if command == "search"
-      puts "What do you want to search for?"
-      input = $stdin.gets.chomp
-      puts "You asked for: #{input}"
-      statement = "select movie_entries.title from movie_entries where title LIKE '%#{input}%'"
+    if options[:command] == "search"
+      search_term = ask("What do you want to search for?")
+
+      puts "You asked for: #{search_term}"
+      statement = "select movie_entries.title from movie_entries where title LIKE '%#{search_term}%'"
       results = database.execute(statement)
       puts results
-    elsif command == "add"
+    elsif options[:command] == "add"
       error_messages = ParseArguments.validate(options)
       if error_messages.empty?
         movie_entry = MovieEntries.new(options)
@@ -31,10 +36,10 @@ class Movie
       else
         puts error_messages
       end
-    elsif command == "list"
+    elsif options[:command] == "list"
       puts "All Movies:"
       puts MovieEntries.all
-    elsif command == "edit"
+    elsif options[:command] == "edit"
       if movie_entry = MovieEntries.find(options[:id])
         movie_entry.update(options)
         puts "Movie entry #{movie_entry.id} is now named #{movie_entry.title}, with seen #{movie_entry.seen}, own #{movie_entry.own}, wishlist see #{movie_entry.wishlist_see}, wishlist own #{movie_entry.wishlist_own}, user rating #{movie_entry.user_rating}"
