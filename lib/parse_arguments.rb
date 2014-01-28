@@ -6,6 +6,12 @@ class ParseArguments
     OptionParser.new do |opts|
       opts.banner = "Usage: movie [command] [options]"
 
+      opts.on("--id [ID]", "The movie entry id") do |id|
+        options[:id] = id
+      end
+      opts.on("-t [TITLE]", "The movie title") do |title|
+        options[:title] = title
+      end
       opts.on("-s [SEEN]", "Movie seen?") do |seen|
         options[:seen] = seen
       end

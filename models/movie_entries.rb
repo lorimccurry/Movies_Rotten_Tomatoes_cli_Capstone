@@ -6,9 +6,7 @@ class MovieEntries
   attr_reader :id
 
   def initialize attributes = {}
-    [:title, :seen, :own, :wishlist_see, :wishlist_own, :user_rating].each do |attr|
-      self.send("#{attr}=", attributes[attr])
-    end
+    update_attributes(attributes)
   end
 
   def self.create(attributes = {})
@@ -17,12 +15,34 @@ class MovieEntries
     movie_entry
   end
 
+  def update attributes = {}
+    update_attributes(attributes)
+    save
+  end
+
   def save
     database = Environment.database_connection
-    database.execute("insert into movie_entries(title, seen, own, wishlist_see, wishlist_own, user_rating) values('#{title}', '#{seen}', '#{own}', '#{wishlist_see}', '#{wishlist_own}', '#{user_rating}')")
-    @id = database.last_insert_row_id
+    if id
+      database.execute("update movie_entries set title = '#{title}', seen = '#{seen}', own = '#{own}', wishlist_see = '#{wishlist_see}', wishlist_own = '#{wishlist_own}', user_rating = '#{user_rating}' where id = '#{id}'")
+    else
+      database.execute("insert into movie_entries(title, seen, own, wishlist_see, wishlist_own, user_rating) values('#{title}', '#{seen}', '#{own}', '#{wishlist_see}', '#{wishlist_own}', '#{user_rating}')")
+      @id = database.last_insert_row_id
+    end
     #fails silently
     #susceptible to SQL injection
+  end
+
+  def self.find id
+    database = Environment.database_connection
+    database.results_as_hash = true
+    results = database.execute("select * from movie_entries where id = #{id}")[0]
+    if results
+      movie_entry = MovieEntries.new(title: results["title"], seen: results["seen"], own: results["own"], wishlist_see: results["wishlist_see"], wishlist_own: results["wishlist_own"], user_rating: results["user_rating"])
+      movie_entry.send("id=", results["id"])
+      movie_entry
+    else
+      nil
+    end
   end
 
   def self.all
@@ -44,5 +64,13 @@ class MovieEntries
 
   def id=(id)
     @id = id
+  end
+
+  def update_attributes(attributes)
+    [:title, :seen, :own, :wishlist_see, :wishlist_own, :user_rating].each do |attr|
+      if attributes[attr]
+        self.send("#{attr}=", attributes[attr])
+      end
+    end
   end
 end

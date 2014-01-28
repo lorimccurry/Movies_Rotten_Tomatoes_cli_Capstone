@@ -8,6 +8,33 @@ class TestMovieEntries < MovieTest
     assert_equal expected, movie_entry.to_s
   end
 
+  def test_update_doesnt_insert_new_row
+    movie_entry = MovieEntries.create(title: "Foo", seen: "t", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "75")
+    foos_before = database.execute("select count(id) from movie_entries")[0][0]
+    movie_entry.update(name: "Bar")
+    foos_after = database.execute("select count(id) from movie_entries")[0][0]
+    assert_equal foos_before, foos_after
+  end
+
+
+  def test_update_saves_to_the_database
+    movie_entry = MovieEntries.create(title: "Foo", seen: "t", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "75")
+    id =  movie_entry.id
+    movie_entry.update(title: "Bar", seen: "f", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "67")
+    updated_movie_entry = MovieEntries.find(id)
+    expected = ["Bar", "f", "f", "f", "t", 67]
+    actual = [updated_movie_entry.title, updated_movie_entry.seen, updated_movie_entry.own, updated_movie_entry.wishlist_see, updated_movie_entry.wishlist_own, updated_movie_entry.user_rating]
+    assert_equal expected, actual
+  end
+
+  def test_update_is_reflected_in_existing_instance
+    movie_entry = MovieEntries.create(title: "Foo", seen: "t", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "75")
+    movie_entry.update(title: "Bar", seen: "f", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "67")
+    expected = ["Bar", "f", "f", "f", "t", "67"]
+    actual = [movie_entry.title, movie_entry.seen, movie_entry.own, movie_entry.wishlist_see, movie_entry.wishlist_own, movie_entry.user_rating]
+    assert_equal expected, actual
+  end
+
   def test_saved_movie_entries_are_saved
     movie_entry = MovieEntries.new(title: "Foo", seen: "t", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "75")
     foos_before = database.execute("select count(id) from movie_entries")[0][0]
@@ -19,6 +46,17 @@ class TestMovieEntries < MovieTest
   def test_save_creates_an_id
     movie_entry = MovieEntries.create(title: "Foo", seen: "t", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "75")
     refute_nil movie_entry.id, "Movie entry shouldn't be nil"
+  end
+
+  def test_find_returns_nil_if_unfindable
+    assert_nil MovieEntries.find(12345)
+  end
+
+  def test_find_returns_the_row_as_purchase_object
+    movie_entry = MovieEntries.create(title: "Foo", seen: "t", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "75")
+    found = MovieEntries.find(movie_entry.id)
+    assert_equal movie_entry.title, found.title
+    assert_equal movie_entry.id, found.id
   end
 
   def test_all_movie_entries_in_alphabetical_order
