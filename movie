@@ -35,8 +35,7 @@ class Movie
         puts error_messages
       end
     elsif options[:command] == "list"
-      puts "All Movies:"
-      puts MovieEntries.all
+      list_movies()
     elsif options[:command] == "edit"
       if movie_entry = MovieEntries.find(options[:id])
         movie_entry.update(options)
@@ -47,6 +46,11 @@ class Movie
     else
       puts "Command not implemented"
     end
+  end
+
+  def list_movies()
+    puts "All Movies:"
+    puts MovieEntries.all
   end
 end
 
