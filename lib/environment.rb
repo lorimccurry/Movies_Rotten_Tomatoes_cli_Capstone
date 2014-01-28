@@ -3,7 +3,7 @@ require_relative '../models/movie_entries'
 require 'logger'
 
 class Environment
-  def self.database_connection(environment = "production")
+  def self.database_connection
     Database.connection(@@environment)
   end
 
