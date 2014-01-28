@@ -2,7 +2,7 @@
 
 require_relative 'lib/environment'
 require_relative 'lib/parse_arguments'
-require_relative 'models/movie_entry'
+require_relative 'models/movie_entries'
 
 command = ARGV[0]
 options = ParseArguments.parse
