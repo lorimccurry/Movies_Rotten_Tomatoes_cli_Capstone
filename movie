@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require_relative 'lib/environment'
-require_relative 'lib/parse_arguments'
+require_relative 'lib/argument_parser'
 require_relative 'models/movie_entries'
 require_relative 'lib/interactions'
 
@@ -11,9 +11,7 @@ class Movie
   attr_reader :options
 
   def initialize
-    @options = ParseArguments.parse
-    @options[:title] ||= ARGV[1]
-    @options[:command] = ARGV[0]
+    @options = ArgumentParser.parse
     Environment.environment = @options[:environment] || "production"
   end
 
@@ -28,7 +26,7 @@ class Movie
       results = database.execute(statement)
       puts results
     elsif options[:command] == "add"
-      error_messages = ParseArguments.validate(options)
+      error_messages = ArgumentParser.validate(options)
       if error_messages.empty?
         movie_entry = MovieEntries.new(options)
         movie_entry.save
