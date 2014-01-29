@@ -72,11 +72,7 @@ class MovieEntries
   end
 
   def ==(other)
-    if other.is_a? MovieEntries
-      self.to_s == other.to_s
-    else
-      false
-    end
+    other.is_a?(MovieEntries) && self.to_s == other.to_s
   end
 
   protected
