@@ -45,10 +45,10 @@ class MovieEntries
     end
   end
 
-  def self.search(search_term)
+  def self.search(search_term = nil)
     database = Environment.database_connection
     database.results_as_hash = true
-    results = database.execute("select movie_entries.title from movie_entries where title LIKE '%#{search_term}%'")
+    results = database.execute("select movie_entries.* from movie_entries where title LIKE '%#{search_term}%' order by title ASC")
     results.map do |row_hash|
       movie_entry = MovieEntries.new(title: row_hash["title"], seen: row_hash["seen"], own: row_hash["own"], wishlist_see: row_hash["wishlist_see"], wishlist_own: row_hash["wishlist_own"], user_rating: row_hash["user_rating"])
       movie_entry.send("id=", row_hash["id"])
@@ -57,14 +57,7 @@ class MovieEntries
   end
 
   def self.all
-    database = Environment.database_connection
-    database.results_as_hash = true
-    results = database.execute("select * from movie_entries order by title ASC")
-    results.map do |row_hash|
-      movie_entry = MovieEntries.new(title: row_hash["title"], seen: row_hash["seen"], own: row_hash["own"], wishlist_see: row_hash["wishlist_see"], wishlist_own: row_hash["wishlist_own"], user_rating: row_hash["user_rating"])
-      movie_entry.send("id=", row_hash["id"])
-      movie_entry
-    end
+    search
   end
 
   def to_s

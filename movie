@@ -52,9 +52,6 @@ class Movie
   def search_movie_entries_for(search_term)
     puts "You asked for: #{search_term}"
     puts MovieEntries.search(search_term)
-    # statement = "select movie_entries.title from movie_entries where title LIKE '%#{search_term}%'"
-    # results = database.execute(statement)
-    # puts results
   end
 end
 
