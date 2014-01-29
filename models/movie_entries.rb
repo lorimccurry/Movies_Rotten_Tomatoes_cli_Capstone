@@ -71,6 +71,14 @@ class MovieEntries
     "#{title}: seen #{seen}, own #{own}, wishlist see #{wishlist_see}, wishlist own #{wishlist_own}, user rating: #{user_rating}, id: #{id}"
   end
 
+  def ==(other)
+    if other.is_a? MovieEntries
+      self.to_s == other.to_s
+    else
+      false
+    end
+  end
+
   protected
 
   def id=(id)

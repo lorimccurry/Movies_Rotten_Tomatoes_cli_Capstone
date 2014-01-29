@@ -96,4 +96,26 @@ class TestMovieEntries < MovieTest
     results = MovieEntries.all
     assert_equal [], results
   end
+
+  def test_equality_on_same_object
+    movie_entry = MovieEntries.create(title: "foo", seen: "t", own: "f", wishlist_see: "t", wishlist_own: "t", user_rating: "42")
+    assert movie_entry == movie_entry
+  end
+
+  def test_equality_with_different_class
+    movie_entry = MovieEntries.create(title: "foo", seen: "t", own: "f", wishlist_see: "t", wishlist_own: "t", user_rating: "42")
+    refute movie_entry == "Movie Entry"
+  end
+
+  def test_equality_with_different_movie_entry
+    movie_entry1 = MovieEntries.create(title: "foo", seen: "t", own: "f", wishlist_see: "t", wishlist_own: "t", user_rating: "42")
+    movie_entry2 = MovieEntries.create(title: "bar", seen: "f", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "67")
+    refute movie_entry1 == movie_entry2
+  end
+
+  def test_equality_with_same_movie_entry_different_object_id
+    movie_entry1 = MovieEntries.create(title: "foo", seen: "t", own: "f", wishlist_see: "t", wishlist_own: "t", user_rating: "42")
+    movie_entry2 = MovieEntries.find(movie_entry1.id)
+    assert movie_entry1 == movie_entry2
+  end
 end
