@@ -20,11 +20,7 @@ class Movie
 
     if options[:command] == "search"
       search_term = ask("What do you want to search for?")
-
-      puts "You asked for: #{search_term}"
-      statement = "select movie_entries.title from movie_entries where title LIKE '%#{search_term}%'"
-      results = database.execute(statement)
-      puts results
+      search_movie_entries_for(search_term)
     elsif options[:command] == "add"
       error_messages = ArgumentParser.validate(options)
       if error_messages.empty?
@@ -51,6 +47,14 @@ class Movie
   def list_movies()
     puts "All Movies:"
     puts MovieEntries.all
+  end
+
+  def search_movie_entries_for(search_term)
+    puts "You asked for: #{search_term}"
+    puts MovieEntries.search(search_term)
+    # statement = "select movie_entries.title from movie_entries where title LIKE '%#{search_term}%'"
+    # results = database.execute(statement)
+    # puts results
   end
 end
 
