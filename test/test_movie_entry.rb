@@ -16,7 +16,6 @@ class TestMovieEntries < MovieTest
     assert_equal foos_before, foos_after
   end
 
-
   def test_update_saves_to_the_database
     movie_entry = MovieEntries.create(title: "Foo", seen: "t", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "75")
     id =  movie_entry.id
