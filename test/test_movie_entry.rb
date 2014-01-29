@@ -59,6 +59,30 @@ class TestMovieEntries < MovieTest
     assert_equal movie_entry.id, found.id
   end
 
+  def test_search_returns_purchase_objects
+    MovieEntries.create(title: "Erin Brocovich", seen: "t", own: "f", wishlist_see: "t", wishlist_own: "t", user_rating: "42")
+    MovieEntries.create(title: "Good Will Hunting", seen: "f", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "67")
+    MovieEntries.create(title: "A Good Year", seen: "f", own: "t", wishlist_see: "t", wishlist_own: "f", user_rating: "n/a")
+    results = MovieEntries.search("Good")
+    assert results.all?{ |result| result.is_a? MovieEntries }, "Not all results were MovieEntries"
+  end
+
+  def test_search_returns_appropriate_results
+    MovieEntries.create(title: "Erin Brocovich", seen: "t", own: "f", wishlist_see: "t", wishlist_own: "t", user_rating: "42")
+    MovieEntries.create(title: "Good Will Hunting", seen: "f", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "67")
+    MovieEntries.create(title: "A Good Year", seen: "f", own: "t", wishlist_see: "t", wishlist_own: "f", user_rating: "n/a")
+    results = MovieEntries.search("Good")
+    assert_equal ["Good Will Hunting", "A Good Year"], results.map(&:title)
+  end
+
+  def test_search_returns_empty_array_if_no_results
+    MovieEntries.create(title: "Erin Brocovich", seen: "t", own: "f", wishlist_see: "t", wishlist_own: "t", user_rating: "42")
+    MovieEntries.create(title: "Good Will Hunting", seen: "f", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "67")
+    MovieEntries.create(title: "A Good Year", seen: "f", own: "t", wishlist_see: "t", wishlist_own: "f", user_rating: "n/a")
+    results = MovieEntries.search("Bad")
+    assert_equal [], results
+  end
+
   def test_all_movie_entries_in_alphabetical_order
     MovieEntries.create(title: "foo", seen: "t", own: "f", wishlist_see: "t", wishlist_own: "t", user_rating: "42")
     MovieEntries.create(title: "bar", seen: "f", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "67")
