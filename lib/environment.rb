@@ -1,6 +1,5 @@
 require_relative 'database'
 require_relative '../models/movie_entries'
-require_relative '../models/genre'
 require 'logger'
 
 class Environment

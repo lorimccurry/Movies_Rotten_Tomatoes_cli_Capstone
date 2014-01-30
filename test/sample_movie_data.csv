@@ -1,6 +1,6 @@
-title,year,genre,runtime,rated,tomato_meter,tomato_user_meter,tomato_image
-Her,2013,Drama,126 min,R,94,86,fresh
-August Osage County,2013,Drama,130 min,R,65,72,fresh
-Labor Day,2013,Romance,111 min,PG-13,59,93,rotten
-When Harry Met Sally,1989,Comedy,96 min,R,88,89,fresh
-Dirty Dancing,1987,Drama,85 min,PG-13,72,91,fresh
+movie,	seen,	own,	wishlist_see,	wishlist_own,	user_rating
+Up,	t,	f,	f,	t,	95
+The Social Network,	t,	t,	f,	f,	85
+Fight Club,	f,	f,	t,	f,	N/A
+When Harry Met Sally,	t,	t,	f,	f,	90
+Magic Mike,	t,	f,	f,	f,	10
