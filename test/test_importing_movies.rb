@@ -8,11 +8,13 @@ class TestImportingMovies < MovieTest
   end
 
   def test_the_correct_number_of_movies_are_imported
+    skip
     import_data
     assert_equal 5, MovieEntries.all.count
   end
 
   def test_products_are_imported_fully
+    skip
     import_data
     expected = ["Up,t,f,f,t,95",
     "The Social Network,t,t,f,f,85",
@@ -26,11 +28,13 @@ class TestImportingMovies < MovieTest
   end
 
   def test_extra_movies_arent_created
+    skip
     import_data
     assert 5, Movie.nil.count
   end
 
   def test_movies_are_created_as_needed
+    skip
     Movie.create("Good Will Hunting")
     Movie.create("Up")
     import_data
@@ -38,6 +42,7 @@ class TestImportingMovies < MovieTest
   end
 
   def test_data_isnt_duplicated
+    skip
     import_data
     expected = ["Good Will Hunting", "American Hustle", "Up"]
     assert_equal expected, Movie.all.map(&:movie)
