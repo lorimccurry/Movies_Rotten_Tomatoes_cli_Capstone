@@ -23,7 +23,7 @@ class TestMovieEntries < MovieTest
     id =  movie_entry.id
     movie_entry.update(title: "Bar", seen: "f", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "67")
     updated_movie_entry = MovieEntries.find(id)
-    expected = ["Bar", "f", "f", "f", "t", 67]
+    expected = ["Bar", "f", "f", "f", "t", "67"]
     actual = [updated_movie_entry.title, updated_movie_entry.seen, updated_movie_entry.own, updated_movie_entry.wishlist_see, updated_movie_entry.wishlist_own, updated_movie_entry.user_rating]
     assert_equal expected, actual
   end
@@ -31,7 +31,7 @@ class TestMovieEntries < MovieTest
   def test_update_is_reflected_in_existing_instance
     movie_entry = MovieEntries.create(title: "Foo", seen: "t", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "75")
     movie_entry.update(title: "Bar", seen: "f", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "67")
-    expected = ["Bar", "f", "f", "f", "t", 67]
+    expected = ["Bar", "f", "f", "f", "t", "67"]
     actual = [movie_entry.title, movie_entry.seen, movie_entry.own, movie_entry.wishlist_see, movie_entry.wishlist_own, movie_entry.user_rating]
     assert_equal expected, actual
   end

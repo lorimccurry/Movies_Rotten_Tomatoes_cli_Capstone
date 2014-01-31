@@ -26,7 +26,6 @@ task :test_prepare do
 end
 
 def create_tables(database_connection)
-  # database_connection.execute("CREATE TABLE movie_entries (id INTEGER PRIMARY KEY AUTOINCREMENT, title varchar(100), seen integer, own integer, wishlist_see integer, wishlist_own integer, user_rating integer)")
-  database_connection.execute("CREATE TABLE movie_entries (id INTEGER PRIMARY KEY AUTOINCREMENT, title varchar(100), seen integer, own integer, wishlist_see integer, wishlist_own integer, user_rating integer, movie_id integer)")
+  database_connection.execute("CREATE TABLE movie_entries (id INTEGER PRIMARY KEY AUTOINCREMENT, title varchar(100), seen integer, own integer, wishlist_see integer, wishlist_own integer, user_rating varchar(3), movie_id integer)")
   database_connection.execute("CREATE TABLE movies (id INTEGER PRIMARY KEY AUTOINCREMENT, title varchar(100), year integer, rated varchar(10), runtime varchar(20), genre varchar(100), tomato_meter integer, tomato_image varchar(10), tomato_user_meter integer, released varchar(20), dvd varchar(20), production varchar(50), box_office varchar(10))")
 end

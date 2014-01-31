@@ -11,7 +11,7 @@ class MovieTest < Minitest::Unit::TestCase
   end
 
   def teardown
-    database.execute("delete from movie_entries")
+    database.execute("delete from movie_entries") #where id = x
     database.execute("delete from movies")
   end
 

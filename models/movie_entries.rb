@@ -1,6 +1,5 @@
-require_relative '../lib/environment'
-require 'sqlite3'
-
+# require_relative '../lib/environment'
+# require 'sqlite3'
 class MovieEntries
   attr_accessor :title, :seen, :own, :wishlist_see, :wishlist_own, :user_rating, :movie
   attr_reader :id
@@ -10,7 +9,7 @@ class MovieEntries
   end
 
   def user_rating=(user_rating)
-    @user_rating = user_rating.to_i
+    @user_rating = user_rating
   end
 
   def self.create(attributes = {})
@@ -26,11 +25,11 @@ class MovieEntries
 
   def save
     database = Environment.database_connection
-    movie_id = movie.nil? ? "NULL" : movie_id
+    movie_id = movie.nil? ? "NULL" : movie.id
     if id
       database.execute("update movie_entries set title = '#{title}', seen = '#{seen}', own = '#{own}', wishlist_see = '#{wishlist_see}', wishlist_own = '#{wishlist_own}', user_rating = '#{user_rating}', movie_id = #{movie_id} where id = #{id}")
     else
-      database.execute("insert into movie_entries(title, seen, own, wishlist_see, wishlist_own, user_rating, movie_id) values('#{title}', '#{seen}', '#{own}', '#{wishlist_see}', '#{wishlist_own}', #{user_rating}, #{movie_id})")
+      database.execute("insert into movie_entries(title, seen, own, wishlist_see, wishlist_own, user_rating, movie_id) values('#{title}', '#{seen}', '#{own}', '#{wishlist_see}', '#{wishlist_own}', '#{user_rating}', #{movie_id})")
       @id = database.last_insert_row_id
     end
     #fails silently
@@ -62,7 +61,7 @@ class MovieEntries
                     wishlist_see: row_hash["wishlist_see"],
                     wishlist_own: row_hash["wishlist_own"],
                     user_rating: row_hash["user_rating"])
-      movie = Movie.all.find{|movie| movie_id == row_hash["movie_id"]}
+      movie = Movie.all.find{|movie| movie.id == row_hash["movie_id"]}
       movie_entry.movie = movie
       movie_entry.send("id=", row_hash["id"])
       movie_entry
@@ -90,7 +89,7 @@ class MovieEntries
   def update_attributes(attributes)
     [:title, :seen, :own, :wishlist_see, :wishlist_own, :user_rating, :movie].each do |attr|
       if attributes[attr]
-        self.send("#{attr}=".strip, attributes[attr])
+        self.send("#{attr}=", attributes[attr])
       end
     end
   end
