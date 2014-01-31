@@ -29,7 +29,7 @@ class TestMovieEntries < MovieTest
   def test_update_is_reflected_in_existing_instance
     movie_entry = MovieEntries.create(title: "Foo", seen: "t", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "75")
     movie_entry.update(title: "Bar", seen: "f", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "67")
-    expected = ["Bar", "f", "f", "f", "t", "67"]
+    expected = ["Bar", "f", "f", "f", "t", 67]
     actual = [movie_entry.title, movie_entry.seen, movie_entry.own, movie_entry.wishlist_see, movie_entry.wishlist_own, movie_entry.user_rating]
     assert_equal expected, actual
   end

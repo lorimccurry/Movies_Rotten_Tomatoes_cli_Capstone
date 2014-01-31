@@ -9,7 +9,7 @@ class MovieEntries
     update_attributes(attributes)
   end
 
-  def user_rating(user_rating)
+  def user_rating=(user_rating)
     @user_rating = user_rating.to_i
   end
 
