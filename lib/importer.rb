@@ -15,7 +15,8 @@ class Importer
       own: row_hash["own"],
       wishlist_see: row_hash["wishlist_see"],
       wishlist_own: row_hash["wishlist_own"],
-      user_rating: row_hash["user_rating"].to_i
+      user_rating: row_hash["user_rating"].to_i,
+      movie: movie
     )
   end
 

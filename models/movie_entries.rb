@@ -2,7 +2,7 @@ require_relative '../lib/environment'
 require 'sqlite3'
 
 class MovieEntries
-  attr_accessor :title, :seen, :own, :wishlist_see, :wishlist_own, :user_rating
+  attr_accessor :title, :seen, :own, :wishlist_see, :wishlist_own, :user_rating, :movie
   attr_reader :id
 
   def initialize attributes = {}
@@ -26,10 +26,11 @@ class MovieEntries
 
   def save
     database = Environment.database_connection
+    movie_id = movie.nil? ? "NULL" : movie_id
     if id
-      database.execute("update movie_entries set title = '#{title}', seen = '#{seen}', own = '#{own}', wishlist_see = '#{wishlist_see}', wishlist_own = '#{wishlist_own}', user_rating = '#{user_rating}' where id = '#{id}'")
+      database.execute("update movie_entries set title = '#{title}', seen = '#{seen}', own = '#{own}', wishlist_see = '#{wishlist_see}', wishlist_own = '#{wishlist_own}', user_rating = '#{user_rating}', movie_id = #{movie_id} where id = #{id}")
     else
-      database.execute("insert into movie_entries(title, seen, own, wishlist_see, wishlist_own, user_rating) values('#{title}', '#{seen}', '#{own}', '#{wishlist_see}', '#{wishlist_own}', '#{user_rating}')")
+      database.execute("insert into movie_entries(title, seen, own, wishlist_see, wishlist_own, user_rating, movie_id) values('#{title}', '#{seen}', '#{own}', '#{wishlist_see}', '#{wishlist_own}', #{user_rating}, #{movie_id})")
       @id = database.last_insert_row_id
     end
     #fails silently
@@ -54,7 +55,15 @@ class MovieEntries
     database.results_as_hash = true
     results = database.execute("select movie_entries.* from movie_entries where title LIKE '%#{search_term}%' order by title ASC")
     results.map do |row_hash|
-      movie_entry = MovieEntries.new(title: row_hash["title"], seen: row_hash["seen"], own: row_hash["own"], wishlist_see: row_hash["wishlist_see"], wishlist_own: row_hash["wishlist_own"], user_rating: row_hash["user_rating"])
+      movie_entry = MovieEntries.new(
+                    title: row_hash["title"],
+                    seen: row_hash["seen"],
+                    own: row_hash["own"],
+                    wishlist_see: row_hash["wishlist_see"],
+                    wishlist_own: row_hash["wishlist_own"],
+                    user_rating: row_hash["user_rating"])
+      movie = Movie.all.find{|movie| movie_id == row_hash["movie_id"]}
+      movie_entry.movie = movie
       movie_entry.send("id=", row_hash["id"])
       movie_entry
     end
@@ -79,7 +88,7 @@ class MovieEntries
   end
 
   def update_attributes(attributes)
-    [:title, :seen, :own, :wishlist_see, :wishlist_own, :user_rating].each do |attr|
+    [:title, :seen, :own, :wishlist_see, :wishlist_own, :user_rating, :movie].each do |attr|
       if attributes[attr]
         self.send("#{attr}=".strip, attributes[attr])
       end

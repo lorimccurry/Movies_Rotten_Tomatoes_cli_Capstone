@@ -49,6 +49,23 @@ class TestMovieEntries < MovieTest
     refute_nil movie_entry.id, "Movie entry shouldn't be nil"
   end
 
+  def test_save_saves_category_id
+    movie = Movie.find_or_create("Up")
+    movie_entry = MovieEntries.create(title: "American Hustle", seen: "t", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "75", movie: movie)
+    movie_id = database.execute("select movie_id from movie_entries where id='#{movie_entry.id}'")[0][0]
+    assert_equal movie.id, movie_id, "Movie.id and movie_entry.movie_id should be the same"
+  end
+
+  def test_save_update_category_id
+    movie1 = Movie.find_or_create("Up")
+    movie2 = Movie.find_or_create("Gravity")
+    movie_entry = MovieEntries.create(title: "American Hustle", seen: "t", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "75", movie: movie1)
+    movie_entry.movie = movie2
+    movie_entry.save
+    movie_id = database.execute("select movie_id from movie_entries where id='#{movie_entry.id}'")[0][0]
+    assert_equal movie2.id, movie_id, "Movie2.id and movie_entry.movie_id should be the same"
+  end
+
   def test_find_returns_nil_if_unfindable
     assert_nil MovieEntries.find(12345)
   end
