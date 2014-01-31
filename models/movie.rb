@@ -26,8 +26,8 @@ class Movie
   def self.find_or_create title
     database = Environment.database_connection
     database.results_as_hash = true
-    results = database.execute("select * from movies where title = '#{title}'")
     movie = Movie.new(title)
+    results = database.execute("select * from movies where title = '#{movie.title}'")
 
     if results.empty?
       database.execute("insert into movies(title) values ('#{movie.title}')")
