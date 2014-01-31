@@ -23,11 +23,19 @@ class Movie
     end
   end
 
-  def self.create title
-    movie = Movie.new(title)
+  def self.find_or_create title
     database = Environment.database_connection
-    database.execute("insert into movies(title) values('#{movie.title}')")
-    movie.send("id=", database.last_insert_row_id)
+    database.results_as_hash = true
+    results = database.execute("select * from movies where title = '#{title}'")
+    movie = Movie.new(title)
+
+    if results.empty?
+      database.execute("insert into movies(title) values ('#{movie.title}')")
+      movie.send("id=", database.last_insert_row_id)
+    else
+      row_hash = results[0]
+      movie.send("id=", row_hash["id"])
+    end
     movie
   end
 

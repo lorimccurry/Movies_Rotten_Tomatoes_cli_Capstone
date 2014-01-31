@@ -5,7 +5,7 @@ class Importer
   def self.import(from_filename)
     CSV.foreach(from_filename, headers: true) do |row_hash|
       import_product(row_hash)
-      Movie.create(row_hash["title"])
+      Movie.find_or_create(row_hash["title"])
     end
   end
 

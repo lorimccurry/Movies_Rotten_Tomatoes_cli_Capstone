@@ -81,7 +81,7 @@ class MovieEntries
   def update_attributes(attributes)
     [:title, :seen, :own, :wishlist_see, :wishlist_own, :user_rating].each do |attr|
       if attributes[attr]
-        self.send("#{attr}=", attributes[attr])
+        self.send("#{attr}=".strip, attributes[attr])
       end
     end
   end

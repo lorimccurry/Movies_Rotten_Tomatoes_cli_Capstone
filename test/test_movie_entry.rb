@@ -3,7 +3,9 @@ require_relative '../models/movie_entries'
 
 class TestMovieEntries < MovieTest
   def test_to_s_prints_details
+    movie = Movie.find_or_create("Foo")
     movie_entry = MovieEntries.new(title: "Foo", seen: "t", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "75")
+    # movie_entry = MovieEntries.new(movie: movie, seen: "t", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "75")
     expected = "Foo: seen t, own f, wishlist see f, wishlist own t, user rating: 75, id: #{movie_entry.id}"
     assert_equal expected, movie_entry.to_s
   end
