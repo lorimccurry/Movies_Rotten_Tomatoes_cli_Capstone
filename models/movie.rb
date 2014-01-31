@@ -4,33 +4,27 @@ class Movie
   attr_accessor :title, :year, :rated, :runtime, :genre, :tomato_meter, :tomato_image, :tomato_user_meter, :released, :dvd, :production, :box_office
   attr_reader :id
 
-  def initialize attributes = {}
-    update_attributes(attributes)
+  def initialize(attributes = {})
+    @title = attributes[:title]
   end
 
-  def self.create(attributes = {})
-    movie_entry = Movie.new(attributes)
-    movie_entry.save
-    movie_entry
-  end
-
-  def save
+  def self.all
     database = Environment.database_connection
-    if id
-      database.execute("update movies set title = '#{title}', year = '#{year}', rated = '#{rated}', runtime = '#{runtime}', genre = '#{genre}', tomato_meter = '#{tomato_meter}',
-    tomato_image = '#{tomato_image}', tomato_user_meter = '#{tomato_user_meter}', released = '#{released}', dvd = '#{dvd}',
-    production = '#{production}', box_office = '#{box_office}' where id = '#{id}'")
-    else
-      database.execute("insert into movies(title, year, rated, runtime, genre, tomato_meter,
-    tomato_image, tomato_user_meter, released, dvd, production, box_office)
-      values('#{title}',
-    '#{year}', '#{rated}', '#{runtime}', '#{genre}', '#{tomato_meter}',
-    '#{tomato_image}', '#{tomato_user_meter}', '#{released}', '#{dvd}',
-    '#{production}', '#{box_office}')")
-      @id = database.last_insert_row_id
+    database.results_as_hash = true
+    results = database.execute("select * from movies order by title ASC")
+    results.map do |row_hash|
+      movie = Movie.new(title: row_hash["title"])
+      movie.send("id=", row_hash["id"])
+      movie
     end
-    #fails silently
-    #susceptible to SQL injection
+  end
+
+  def self.create arguments
+    movie = Movie.new(arguments)
+    database = Environment.database_connection
+    database.execute("insert into movies(title) values('#{movie.title}')")
+    movie.send("id=", database.last_insert_row_id)
+    movie
   end
 
   protected
@@ -38,13 +32,4 @@ class Movie
   def id=(id)
     @id = id
   end
-
-  def update_attributes(attributes)
-    [:title, :year, :rated, :runtime, :genre, :tomato_meter, :tomato_image, :tomato_user_meter, :released, :dvd, :production, :box_office].each do |attr|
-      if attributes[attr]
-        self.send("#{attr}=", attributes[attr])
-      end
-    end
-  end
-
 end

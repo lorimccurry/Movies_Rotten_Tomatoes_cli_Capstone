@@ -1,6 +1,6 @@
 require_relative 'helper'
 require_relative '../lib/importer'
-# require_relative '../models/movie'
+require_relative '../models/movie'
 
 class TestImportingMovies < MovieTest
   def import_data
