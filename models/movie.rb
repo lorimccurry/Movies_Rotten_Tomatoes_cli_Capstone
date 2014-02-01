@@ -27,7 +27,7 @@ class Movie
     database = Environment.database_connection
     database.results_as_hash = true
     movie = Movie.new(title)
-    results = database.execute("select * from movies where title = '#{movie.title}'")
+    results = database.execute("select * from movies where lower(title) like '%#{movie.title.downcase}%'")
 
     if results.empty?
       database.execute("insert into movies(title) values ('#{movie.title}')")

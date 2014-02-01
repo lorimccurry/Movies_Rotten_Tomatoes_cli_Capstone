@@ -6,7 +6,7 @@ require_relative 'models/movie_entries'
 require_relative 'lib/interactions'
 
 #Router
-class Movie
+class MovieScript
   include Interactions
   attr_reader :options
 
@@ -24,7 +24,9 @@ class Movie
     elsif options[:command] == "add"
       error_messages = ArgumentParser.validate(options)
       if error_messages.empty?
+        movie = Movie.find_or_create(options[:title])
         movie_entry = MovieEntries.new(options)
+        movie_entry.movie = movie
         movie_entry.save
         puts "A movie named #{movie_entry.title}, with seen? #{movie_entry.seen}, own? #{movie_entry.own}, wishlist see #{movie_entry.wishlist_see}, wishlist own #{movie_entry.wishlist_own}, user rating #{movie_entry.user_rating} was created"
       else
@@ -55,5 +57,5 @@ class Movie
   end
 end
 
-movie = Movie.new()
+movie = MovieScript.new()
 movie.main()
