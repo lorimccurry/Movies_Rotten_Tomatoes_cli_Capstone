@@ -18,3 +18,6 @@ _yardoc
 
 *.sqlite3
 logs/*.log
+output.txt
+test.rb
+notes
