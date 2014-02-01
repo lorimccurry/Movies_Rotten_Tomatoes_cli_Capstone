@@ -27,9 +27,9 @@ class MovieEntries
     database = Environment.database_connection
     movie_id = movie.nil? ? "NULL" : movie.id
     if id
-      database.execute("update movie_entries set title = '#{title}', seen = '#{seen}', own = '#{own}', wishlist_see = '#{wishlist_see}', wishlist_own = '#{wishlist_own}', user_rating = '#{user_rating}', movie_id = #{movie_id} where id = #{id}")
+      database.execute("update movie_entries set title = '#{title}', seen = #{@seen}, own = #{@own}, wishlist_see = #{@wishlist_see}, wishlist_own = #{@wishlist_own}, user_rating = '#{user_rating}', movie_id = #{movie_id} where id = #{id}")
     else
-      database.execute("insert into movie_entries(title, seen, own, wishlist_see, wishlist_own, user_rating, movie_id) values('#{title}', '#{seen}', '#{own}', '#{wishlist_see}', '#{wishlist_own}', '#{user_rating}', #{movie_id})")
+      database.execute("insert into movie_entries(title, seen, own, wishlist_see, wishlist_own, user_rating, movie_id) values('#{title}', #{@seen}, #{@own}, #{@wishlist_see}, #{@wishlist_own}, '#{user_rating}', #{movie_id})")
       @id = database.last_insert_row_id
     end
     #fails silently
@@ -74,6 +74,22 @@ class MovieEntries
 
   def to_s
     "#{title}: seen #{seen}, own #{own}, wishlist see #{wishlist_see}, wishlist own #{wishlist_own}, user rating: #{user_rating}, id: #{id}"
+  end
+
+  def seen
+    @seen == 1
+  end
+
+  def own
+    @own == 1
+  end
+
+  def wishlist_see
+    @wishlist_see == 1
+  end
+
+  def wishlist_own
+    @wishlist_own == 1
   end
 
   def ==(other)
