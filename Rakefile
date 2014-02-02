@@ -14,7 +14,7 @@ desc 'import data from the given file'
 task :import_data do
   Environment.environment = "production"
   require_relative 'lib/importer'
-  Importer.import("data/movie_entries.csv")
+  Importer.import("data/movie_entries_import.csv")
 end
 
 desc 'create the production database setup'
