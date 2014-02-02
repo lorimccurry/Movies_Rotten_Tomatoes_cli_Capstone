@@ -1,6 +1,6 @@
 title,seen,own,wishlist_see,wishlist_own,user_rating
-Up,t,f,f,t,95
-The Social Network,t,t,f,f,85
-Fight Club,f,f,t,f,none
-When Harry Met Sally,t,t,f,f,90
-Magic Mike,t,f,f,f,10
+Up,1,0,0,1,95
+The Social Network,1,1,0,0,85
+Fight Club,0,0,1,0,none
+When Harry Met Sally,1,1,0,0,90
+Magic Mike,1,0,0,0,10

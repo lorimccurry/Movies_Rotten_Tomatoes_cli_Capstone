@@ -14,11 +14,11 @@ class TestImportingMovieEntries < MovieTest
   def test_movie_entries_are_imported_fully
     import_data
     expected = [
-      "Fight Club, f, f, t, f, none",
-      "Magic Mike, t, f, f, f, 10",
-      "The Social Network, t, t, f, f, 85",
-      "Up, t, f, f, t, 95",
-      "When Harry Met Sally, t, t, f, f, 90",
+      "Fight Club, false, false, true, false, none",
+      "Magic Mike, true, false, false, false, 10",
+      "The Social Network, true, true, false, false, 85",
+      "Up, true, false, false, true, 95",
+      "When Harry Met Sally, true, true, false, false, 90",
     ]
     actual = MovieEntries.all.map do |movie_entry|
       "#{movie_entry.title}, #{movie_entry.seen}, #{movie_entry.own}, #{movie_entry.wishlist_see}, #{movie_entry.wishlist_own}, #{movie_entry.user_rating}"
