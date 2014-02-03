@@ -30,6 +30,9 @@ class MovieScript
       else
         puts "Movie entry #{options[:id]} couldn't be found"
       end
+    elsif options[:command] == "ratings_compare"
+
+
     else
       puts "Command not implemented"
     end
@@ -57,7 +60,6 @@ class MovieScript
       puts error_messages
     end
   end
-
 end
 
 movie = MovieScript.new()

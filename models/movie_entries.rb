@@ -1,5 +1,7 @@
 # require_relative '../lib/environment'
 # require 'sqlite3'
+
+
 class MovieEntries
   attr_accessor :title, :seen, :own, :wishlist_see, :wishlist_own, :user_rating, :movie
   attr_reader :id

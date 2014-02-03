@@ -1,5 +1,5 @@
-require_relative '../lib/environment'
-require 'sqlite3'
+# require_relative '../lib/environment'
+# require 'sqlite3'
 class Movie
   attr_accessor :title, :year, :rated, :runtime, :genre, :tomato_meter, :tomato_image, :tomato_user_meter, :released, :dvd, :production, :box_office
   attr_reader :id
