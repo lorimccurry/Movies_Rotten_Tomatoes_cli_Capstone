@@ -14,13 +14,13 @@ class TestEnteringMovies < MovieTest
   end
 
   def test_02_invalid_movie_doesnt_get_saved
-    `./movie add -s "t" -o "t" --ws "t" --wo "t" -r 100`
+    `./movie add -s "t" -o "t" --wo "t" -r 100`
     result = database.execute("select count(id) from movie_entries")
     assert_equal 0, result[0][0]
   end
 
   def test_03_error_message_for_missing_title
-    command = "./movie add"
+    command = "./movie add -s t -o --ws t --wo -r 100"
     expected = "You must provide the movie title you are adding"
     assert_command_output expected, command
   end
@@ -83,6 +83,36 @@ class TestEnteringMovies < MovieTest
   def test_09_valid_movie_information_gets_printed
     command = "./movie add 'American Hustle' -s t -o --ws --wo t -r 80"
     expected = "A movie named American Hustle, with seen? true, own? false, wishlist see false, wishlist own true, user rating 80, released in 2013, rated R, runtime 138 min, genre Crime, Drama, tomato meter 92, released by Sony Pictures with a box office of $87.9M was created"
+    assert_command_output expected, command
+  end
+
+  def test_error_message_for_missing_seen?
+    command = "./movie add 'Good Will Hunting' -o t --ws --wo  -r 100"
+    expected = "You must provide the seen? of the movie you are adding"
+    assert_command_output expected, command
+  end
+
+  def test_error_message_for_missing_own?
+    command = "./movie add 'Good Will Hunting' -s t --ws --wo -r 100"
+    expected = "You must provide the own? of the movie you are adding"
+    assert_command_output expected, command
+  end
+
+  def test_error_message_for_missing_wishlist_see?
+    command = "./movie add 'Good Will Hunting' -s t -o t --wo -r 100"
+    expected = "You must provide the wishlist see of the movie you are adding"
+    assert_command_output expected, command
+  end
+
+  def test_error_message_for_missing_wishlist_own?
+    command = "./movie add 'Good Will Hunting' -s t -o t --ws -r 100"
+    expected = "You must provide the wishlist own of the movie you are adding"
+    assert_command_output expected, command
+  end
+
+  def test_error_message_for_missing_rating
+    command = "./movie add 'Good Will Hunting' -s t -o t --ws --wo"
+    expected = "You must provide the user rating of the movie you are adding"
     assert_command_output expected, command
   end
 end

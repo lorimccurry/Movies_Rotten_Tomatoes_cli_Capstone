@@ -3,10 +3,10 @@ require_relative '../models/movie_entries'
 
 class TestMovieEntries < MovieTest
   def test_to_s_prints_details
-    movie = Movie.find_or_create("Foo")
-    movie_entry = MovieEntries.create(title: "Foo", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75")
+    movie = Movie.find_or_create(title: "Up", year: "2009", rated: "PG", runtime: "96 min", genre: "Animation, Adventure, Drama", tomato_meter: "98", tomato_image: "certified", tomato_user_meter: "89", released: "29 May 2009", dvd: "10 Nov 2009", production: "Walt Disney Pictures", box_office: "$293.0M")
+    movie_entry = MovieEntries.create(title: "Up", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75")
     # movie_entry = MovieEntries.new(movie: movie, seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75")
-    expected = "Foo: seen true, own false, wishlist see false, wishlist own true, user rating: 75, id: #{movie_entry.id}"
+    expected = "Up: seen true, own false, wishlist see false, wishlist own true, user rating: 75, id: #{movie_entry.id}"
     assert_equal expected, movie_entry.to_s
   end
 
@@ -19,11 +19,11 @@ class TestMovieEntries < MovieTest
   end
 
   def test_update_saves_to_the_database
-    movie_entry = MovieEntries.create(title: "Foo", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75")
+    movie_entry = MovieEntries.create(title: "Gravity", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75")
     id =  movie_entry.id
-    movie_entry.update(title: "Bar", seen: 0, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "67")
+    movie_entry.update(title: "Up", seen: 0, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "67")
     updated_movie_entry = MovieEntries.find(id)
-    expected = ["Bar", false, false, false, true, "67"]
+    expected = ["Up", false, false, false, true, "67"]
     actual = [updated_movie_entry.title, updated_movie_entry.seen, updated_movie_entry.own, updated_movie_entry.wishlist_see, updated_movie_entry.wishlist_own, updated_movie_entry.user_rating]
     assert_equal expected, actual
   end
@@ -49,17 +49,17 @@ class TestMovieEntries < MovieTest
     refute_nil movie_entry.id, "Movie entry shouldn't be nil"
   end
 
-  def test_save_saves_category_id
-    movie = Movie.find_or_create("Up")
-    movie_entry = MovieEntries.create(title: "American Hustle", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75", movie: movie)
+  def test_save_saves_movie_id
+    movie = Movie.find_or_create(title: "Up", year: "2009", rated: "PG", runtime: "96 min", genre: "Animation, Adventure, Drama", tomato_meter: "98", tomato_image: "certified", tomato_user_meter: "89", released: "29 May 2009", dvd: "10 Nov 2009", production: "Walt Disney Pictures", box_office: "$293.0M")
+    movie_entry = MovieEntries.create(title: "Up", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75", movie: movie)
     movie_id = database.execute("select movie_id from movie_entries where id='#{movie_entry.id}'")[0][0]
     assert_equal movie.id, movie_id, "Movie.id and movie_entry.movie_id should be the same"
   end
 
-  def test_save_update_category_id
-    movie1 = Movie.find_or_create("Up")
-    movie2 = Movie.find_or_create("Gravity")
-    movie_entry = MovieEntries.create(title: "American Hustle", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75", movie: movie1)
+  def test_save_update_movie_id
+    movie1 = Movie.find_or_create(title: "Up", year: "2009", rated: "PG", runtime: "96 min", genre: "Animation, Adventure, Drama", tomato_meter: "98", tomato_image: "certified", tomato_user_meter: "89", released: "29 May 2009", dvd: "10 Nov 2009", production: "Walt Disney Pictures", box_office: "$293.0M")
+    movie2 = Movie.find_or_create(title: "Gravity", year: "2013", rated: "PG-13", runtime: "91 min", genre: "Drama, Sci-Fi, Thriller", tomato_meter: "97", tomato_image: "certified", tomato_user_meter: "85", released: "04 Oct 2013", dvd: "25 Feb 2014", production: "Warner Bros. Pictures", box_office: "$254.6M")
+    movie_entry = MovieEntries.create(title: "Up", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75", movie: movie1)
     movie_entry.movie = movie2
     movie_entry.save
     movie_id = database.execute("select movie_id from movie_entries where id='#{movie_entry.id}'")[0][0]

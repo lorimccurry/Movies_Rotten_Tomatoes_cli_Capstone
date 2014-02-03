@@ -48,11 +48,11 @@ class ArgumentParser
     end
 
     missing_things = []
-    # missing_things << "seen?" unless options[:seen]
-    # missing_things << "own?" unless options[:own]
-    # missing_things << "wishlist see" unless options[:wishlist_see]
-    # missing_things << "wishlist own" unless options[:wishlist_own]
-    # missing_things << "user rating" unless options[:user_rating]
+    missing_things << "seen?" unless options[:seen]
+    missing_things << "own?" unless options[:own]
+    missing_things << "wishlist see" unless options[:wishlist_see]
+    missing_things << "wishlist own" unless options[:wishlist_own]
+    missing_things << "user rating" unless options[:user_rating]
     unless missing_things.empty?
       errors << "You must provide the #{missing_things.join(" and ")} of the movie you are adding"
     end
