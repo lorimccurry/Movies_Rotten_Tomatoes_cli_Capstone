@@ -27,12 +27,14 @@ class Movie
     database = Environment.database_connection
     database.results_as_hash = true
     movie = Movie.new(attributes)
-    results = database.execute("select * from movies where lower(movies.title) like '%#{movie.title.downcase}%'")
+    results = database.execute("select * from movies where title LIKE '%#{movie.title}%'")
     if results.empty?
       database.execute("insert into movies(title, year, rated, runtime, genre, tomato_meter,tomato_image, tomato_user_meter, released, dvd, production, box_office) values('#{attributes[:title]}', '#{attributes[:year]}', '#{attributes[:rated]}', '#{attributes[:runtime]}', '#{attributes[:genre]}', '#{attributes[:tomato_meter]}', '#{attributes[:tomato_image]}', '#{attributes[:tomato_user_meter]}', '#{attributes[:released]}', '#{attributes[:dvd]}', '#{attributes[:production]}', '#{attributes[:box_office]}')")
       movie.send("id=", database.last_insert_row_id)
     else
       row_hash = results[0]
+      attr_hash = {title: row_hash["title"], year: row_hash["year"], rated: row_hash["rated"], runtime: row_hash["runtime"], genre: row_hash["genre"], tomato_meter: row_hash["tomato_meter"], tomato_image: row_hash["tomato_image"], tomato_user_meter: row_hash["tomato_user_meter"], released: row_hash["released"], dvd: row_hash["dvd"], production: row_hash["production"], box_office: row_hash["box_office"]}
+      movie.send("update_attributes", attr_hash)
       movie.send("id=", row_hash["id"])
     end
     movie
