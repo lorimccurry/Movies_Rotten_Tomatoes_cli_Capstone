@@ -33,14 +33,10 @@ class MovieScript
     elsif options[:command] == "ratings_compare"
       compare_ratings()
     else
-      puts "Command not implemented"
+      puts "Please pick a valid command"
     end
   end
 
-  # entries = all entries where user_rating is not "none"
-  # entries.each
-    # user_rating = entry.user_rating
-    # crtic = entry.movie.rottensfg
   def compare_ratings()
     entries = MovieEntries.compare_ratings
     total = 0
@@ -51,7 +47,14 @@ class MovieScript
       puts "'#{entry.title}',  your rating: #{entry.user_rating},  rt critic rating: #{entry.movie.tomato_meter}"
     end
     avg = (total / entries.count)
-    puts "\nYour taste sucks. Your average critic rating difference is #{avg}."
+    if avg > 40
+      puts "\nSplat! Your taste sucks. Your average critic rating difference is #{avg}."
+    elsif avg <= 15
+      puts "\nFresh! You should be a movie critic. Your average critic rating difference is #{avg}."
+    elsif avg > 15 && avg <= 40
+      puts "\nRipening! Keep practicing. Your average critic rating difference is #{avg}."
+    end
+
   end
 
   def list_movies()
