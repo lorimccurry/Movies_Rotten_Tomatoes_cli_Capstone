@@ -48,6 +48,7 @@ class MovieScript
 
   def compare_ratings()
     entries = MovieEntries.compare_ratings
+    puts "*****Ratings Compare: Can I move to L.A., yet?*****\n\n"
     total = 0
     entries.each do |entry|
       diff = entry.user_rating.to_i - entry.movie.tomato_meter.to_i

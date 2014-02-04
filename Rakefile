@@ -10,11 +10,19 @@ end
 desc "Run tests"
 task :default => :test
 
+desc 'delete movie entries table'
+task :prod_teardown do
+  Environment.environment = "production"
+  database = Environment.database_connection
+  database.execute("drop table movie_entries")
+end
+
 desc 'import data from the given file'
 task :import_data do
   Environment.environment = "production"
   require_relative 'lib/importer'
-  Importer.import("data/movie_entries_import.csv")
+  Importer.import("data/movie_entries_import_sad.csv")
+  # Importer.import("data/movie_entries_import_mid.csv")
   # Importer.import("data/movie_entries_import_good.csv")
 end
 

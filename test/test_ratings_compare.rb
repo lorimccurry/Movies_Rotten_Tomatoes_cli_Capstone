@@ -31,7 +31,8 @@ class TestRatingsCompare < MovieTest
       shell_output = pipe.read
     end
     assert_in_output shell_output,
-"'Good Will Hunting',  your rating: 2,  rt critic rating: 97
+"*****Ratings Compare: Can I move to L.A., yet?*****\n\n
+'Good Will Hunting',  your rating: 2,  rt critic rating: 97
 'A Good Year',  your rating: 5,  rt critic rating: 25
 'Erin Brockovich',  your rating: 8,  rt critic rating: 84
 'Up',  your rating: 32,  rt critic rating: 98
@@ -76,7 +77,8 @@ Splat! Your taste sucks. Your average critic rating difference is 55."
       shell_output = pipe.read
     end
     assert_in_output shell_output,
-"'Good Will Hunting',  your rating: 92,  rt critic rating: 97
+"*****Ratings Compare: Can I move to L.A., yet?*****\n\n
+'Good Will Hunting',  your rating: 92,  rt critic rating: 97
 'A Good Year',  your rating: 28,  rt critic rating: 25
 'Erin Brockovich',  your rating: 85,  rt critic rating: 84
 'Up',  your rating: 95,  rt critic rating: 98
@@ -121,7 +123,8 @@ Fresh! Quit your day job and move to Hollywood.. Your average critic rating diff
       shell_output = pipe.read
     end
     assert_in_output shell_output,
-"'Good Will Hunting',  your rating: 62,  rt critic rating: 97
+"*****Ratings Compare: Can I move to L.A., yet?*****\n\n
+'Good Will Hunting',  your rating: 62,  rt critic rating: 97
 'A Good Year',  your rating: 58,  rt critic rating: 25
 'Erin Brockovich',  your rating: 85,  rt critic rating: 84
 'Up',  your rating: 65,  rt critic rating: 98
