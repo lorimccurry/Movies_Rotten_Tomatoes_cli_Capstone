@@ -9,6 +9,10 @@ class TestRatingsCompare < MovieTest
     the_notebook_movie = Movie.find_or_create(title: "The Notebook", year: "2004", rated: "PG-13", runtime: "123 min", genre: "Drama, Romance", tomato_meter: "52", tomato_image: "rotten", tomato_user_meter: "85", released: "25 Jun 2004", dvd: "N/A", production: "N/A", box_office: "N/A")
     the_holiday_movie = Movie.find_or_create(title: "The Holiday", year: "2006", rated: "PG-13", runtime: "138 min", genre: "Comedy, Romance", tomato_meter: "47", tomato_image: "rotten", tomato_user_meter: "80", released: "08 Dec 2006", dvd: "13 Mar 2007", production: "Sony Pictures", box_office: "$63.2M")
     blood_diamond_movie = Movie.find_or_create(title: "Blood Diamond", year: "2006", rated: "R", runtime: "143 min", genre: "Adventure, Drama, Thriller", tomato_meter: "62", tomato_image: "fresh", tomato_user_meter: "90", released: "08 Dec 2006", dvd: "20 Mar 2007", production: "Warner Bros. Pictures", box_office: "$57.3M")
+    once_movie = Movie.find_or_create(title: "Once", year: "2006", rated: "R", runtime: "85 min", genre: "Drama, Music, Romance", tomato_meter: "97", tomato_image: "certified", tomato_user_meter: "91", released: "23 Mar 2007", dvd: "18 Dec 2007", production: "Fox Searchlight", box_office: "$9.2M")
+    ps_i_love_you_movie = Movie.find_or_create(title: "P.S. I Love You", year: "2007", rated: "PG-13", runtime: "126 min", genre: "Drama, Romance", tomato_meter: "24", tomato_image: "rotten", tomato_user_meter: "80", released: "21 Dec 2007", dvd: "N/A", production: "N/A", box_office: "N/A")
+    american_hustle_movie = Movie.find_or_create(title: "American Hustle", year: "2013", rated: "R", runtime: "138 min", genre: "Crime, Drama", tomato_meter: "92", tomato_image: "certified", tomato_user_meter: "81", released: "20 Dec 2013", dvd: "N/A", production: "Sony Pictures", box_office: "$87.9M")
+
     good_will_hunting = MovieEntries.create(title: "Good Will Hunting", seen: 1, own: 1, wishlist_see: 0, wishlist_own: 0, user_rating: "2", movie: good_will_hunting_movie)
     a_good_year = MovieEntries.create(title: "A Good Year", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 0, user_rating: "5", movie: a_good_year_movie)
     erin_brockovich = MovieEntries.create(title: "Erin Brockovich", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "8", movie: erin_brockovich_movie)
@@ -17,23 +21,27 @@ class TestRatingsCompare < MovieTest
     the_notebook = MovieEntries.create(title: "The Notebook", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "100", movie: the_notebook_movie)
     the_holiday = MovieEntries.create(title: "The Holiday", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "91", movie: the_holiday_movie)
     blood_diamond = MovieEntries.create(title: "Blood Diamond", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "21", movie: blood_diamond_movie)
-    # once = MovieEntries.create(title: "Once", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "15", environment: "test")
-    # ps_i_love_you = MovieEntries.create(title: "P.S. I Love You", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "89", environment: "test")
-    # american_hustle = MovieEntries.create(title: "American Hustle", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "none", environment: "test")
+    once = MovieEntries.create(title: "Once", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "15", movie: once_movie)
+    ps_i_love_you = MovieEntries.create(title: "P.S. I Love You", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "89", movie: ps_i_love_you_movie)
+    american_hustle = MovieEntries.create(title: "American Hustle", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "none", movie: american_hustle_movie)
 
     shell_output = ""
     IO.popen('./movie ratings_compare --environment test', 'r+') do |pipe|
       pipe.close_write
       shell_output = pipe.read
     end
-    assert_in_output shell_output, "Your taste sucks. Your average critic rating difference is 59%."
+    assert_in_output shell_output,
+"'Good Will Hunting',  your rating: 2,  rt critic rating: 97
+'A Good Year',  your rating: 5,  rt critic rating: 25
+'Erin Brockovich',  your rating: 8,  rt critic rating: 84
+'Up',  your rating: 32,  rt critic rating: 98
+'Magic Mike',  your rating: 100,  rt critic rating: 80
+'The Notebook',  your rating: 100,  rt critic rating: 52
+'The Holiday',  your rating: 91,  rt critic rating: 47
+'Blood Diamond',  your rating: 21,  rt critic rating: 62
+'Once',  your rating: 15,  rt critic rating: 97
+'P.S. I Love You',  your rating: 89,  rt critic rating: 24
+
+Your taste sucks. Your average critic rating difference is 55."
   end
-
-  # def test_09_valid_movie_information_gets_printed
-  #   Movie.find_or_create(title: "American Hustle", year: "2013", rated: "R", runtime: "138 min", genre: "Crime, Drama", tomato_meter: "92", tomato_image: "certified", tomato_user_meter: "81", released: "20 Dec 2013", dvd: "N/A", production: "Sony Pictures", box_office: "$87.9M")
-  #   command = "./movie compare 'American Hustle' -s t -o --ws --wo t -r 80"
-  #   expected = "A movie named American Hustle, with seen? true, own? false, wishlist see false, wishlist own true, user rating 80, released in 2013, rated R, runtime 138 min, genre Crime, Drama, tomato meter 92, released by Sony Pictures with a box office of $87.9M was created"
-  #   assert_command_output expected, command
-  # end
-
 end

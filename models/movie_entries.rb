@@ -77,8 +77,7 @@ class MovieEntries
   def self.compare_ratings(search_term = nil)
     database = Environment.database_connection
     database.results_as_hash = true
-    results = database.execute("select * from movie_entries where user_rating is not 'none'")
-    # puts results
+    results = database.execute("select * from movie_entries where user_rating != 'none'")
     results.map do |row_hash|
       movie_entry = MovieEntries.new(
                     title: row_hash["title"],

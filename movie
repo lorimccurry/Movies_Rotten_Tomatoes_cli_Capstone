@@ -48,9 +48,10 @@ class MovieScript
       diff = entry.user_rating.to_i - entry.movie.tomato_meter.to_i
       pos_diff = diff < 0 ? diff * (-1) : diff
       total += pos_diff
+      puts "'#{entry.title}',  your rating: #{entry.user_rating},  rt critic rating: #{entry.movie.tomato_meter}"
     end
-    avg = (total / entries.count).ceil
-    puts "Your taste sucks. Your average critic rating difference is #{avg}%."
+    avg = (total / entries.count)
+    puts "\nYour taste sucks. Your average critic rating difference is #{avg}."
   end
 
   def list_movies()
