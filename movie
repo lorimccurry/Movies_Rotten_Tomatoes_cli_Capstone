@@ -31,16 +31,32 @@ class MovieScript
         puts "Movie entry #{options[:id]} couldn't be found"
       end
     elsif options[:command] == "ratings_compare"
-
-
+      compare_ratings()
     else
       puts "Command not implemented"
     end
   end
 
+  # entries = all entries where user_rating is not "none"
+  # entries.each
+    # user_rating = entry.user_rating
+    # crtic = entry.movie.rottensfg
+  def compare_ratings()
+    entries = MovieEntries.compare_ratings
+    total = 0
+    entries.each do |entry|
+      diff = entry.user_rating.to_i - entry.movie.tomato_meter.to_i
+      pos_diff = diff < 0 ? diff * (-1) : diff
+      total += pos_diff
+    end
+    avg = (total / entries.count).ceil
+    puts "Your taste sucks. Your average critic rating difference is #{avg}%."
+  end
+
   def list_movies()
     puts "All Movies:"
     puts MovieEntries.all
+    #can update this to var = MovieEntries.all; then have access to entries and movie and make this message whatever
   end
 
   def search_movie_entries_for(search_term)

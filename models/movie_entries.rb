@@ -74,6 +74,26 @@ class MovieEntries
     search
   end
 
+  def self.compare_ratings(search_term = nil)
+    database = Environment.database_connection
+    database.results_as_hash = true
+    results = database.execute("select * from movie_entries where user_rating is not 'none'")
+    # puts results
+    results.map do |row_hash|
+      movie_entry = MovieEntries.new(
+                    title: row_hash["title"],
+                    seen: row_hash["seen"],
+                    own: row_hash["own"],
+                    wishlist_see: row_hash["wishlist_see"],
+                    wishlist_own: row_hash["wishlist_own"],
+                    user_rating: row_hash["user_rating"])
+      movie = Movie.all.find{|movie| movie.id == row_hash["movie_id"]}
+      movie_entry.movie = movie
+      movie_entry.send("id=", row_hash["id"])
+      movie_entry
+    end
+  end
+
   def to_s
     "#{title}: seen #{seen}, own #{own}, wishlist see #{wishlist_see}, wishlist own #{wishlist_own}, user rating: #{user_rating}, id: #{id}"
   end
