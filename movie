@@ -59,9 +59,9 @@ class MovieScript
     if avg > 40
       puts "\nSplat! Your taste sucks. Your average critic rating difference is #{avg}."
     elsif avg <= 15
-      puts "\nFresh! You should be a movie critic. Your average critic rating difference is #{avg}."
+      puts "\nFresh! Quit your day job and move to Hollywood. Your average critic rating difference is #{avg}."
     elsif avg > 15 && avg <= 40
-      puts "\nRipening! Keep practicing. Your average critic rating difference is #{avg}."
+      puts "\nRipening! Eat more popcorn. Your average critic rating difference is #{avg}."
     end
   end
 

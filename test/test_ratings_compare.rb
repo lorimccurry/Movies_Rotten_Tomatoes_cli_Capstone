@@ -87,7 +87,7 @@ Splat! Your taste sucks. Your average critic rating difference is 55."
 'Once',  your rating: 60,  rt critic rating: 97
 'P.S. I Love You',  your rating: 25,  rt critic rating: 24
 
-Fresh! You should be a movie critic. Your average critic rating difference is 7."
+Fresh! Quit your day job and move to Hollywood.. Your average critic rating difference is 7."
   end
 
   def test_ratings_compare_produces_best_rating_difference
@@ -132,6 +132,6 @@ Fresh! You should be a movie critic. Your average critic rating difference is 7.
 'Once',  your rating: 90,  rt critic rating: 97
 'P.S. I Love You',  your rating: 55,  rt critic rating: 24
 
-Ripening! Keep practicing. Your average critic rating difference is 26."
+Ripening! Eat more popcorn. Your average critic rating difference is 26."
   end
 end
