@@ -23,6 +23,8 @@ class MovieScript
       add_movie_entry()
     elsif options[:command] == "list"
       list_movies()
+    elsif options[:command] == "all"
+      list_all_movies()
     elsif options[:command] == "edit"
       if movie_entry = MovieEntries.find(options[:id])
         movie_entry.update(options)
@@ -68,6 +70,14 @@ class MovieScript
     puts "Movies in your library:"
     entries.each do |entry|
       puts "#{entry.title}=> id: #{entry.id}, seen: #{entry.seen}, own: #{entry.own}, wishlist see: #{entry.wishlist_see}, wishlist own: #{entry.wishlist_own}, your rating: #{entry.user_rating}, rt critic tomato meter: #{entry.movie.tomato_meter}"
+    end
+  end
+
+  def list_all_movies()
+    entries = Movie.all
+    puts "King Splat Ultimate Movie Database:"
+    entries.each do |entry|
+      puts "#{entry.title} => tomato meter: #{entry.tomato_meter}"
     end
   end
 

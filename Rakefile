@@ -15,6 +15,7 @@ task :import_data do
   Environment.environment = "production"
   require_relative 'lib/importer'
   Importer.import("data/movie_entries_import.csv")
+  # Importer.import("data/movie_entries_import_good.csv")
 end
 
 desc 'create the production database setup'
@@ -34,5 +35,5 @@ end
 
 def create_tables(database_connection)
   database_connection.execute("CREATE TABLE movie_entries (id INTEGER PRIMARY KEY AUTOINCREMENT, title varchar(100), seen boolean, own boolean, wishlist_see boolean, wishlist_own boolean, user_rating varchar(3), movie_id integer)")
-  database_connection.execute("CREATE TABLE movies (id INTEGER PRIMARY KEY AUTOINCREMENT, title varchar(100), year integer, rated varchar(10), runtime varchar(20), genre varchar(100), tomato_meter integer, tomato_image varchar(10), tomato_user_meter integer, released varchar(20), dvd varchar(20), production varchar(50), box_office varchar(10))")
+  # database_connection.execute("CREATE TABLE movies (id INTEGER PRIMARY KEY AUTOINCREMENT, title varchar(100), year integer, rated varchar(10), runtime varchar(20), genre varchar(100), tomato_meter integer, tomato_image varchar(10), tomato_user_meter integer, released varchar(20), dvd varchar(20), production varchar(50), box_office varchar(10))")
 end
