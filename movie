@@ -54,13 +54,14 @@ class MovieScript
     elsif avg > 15 && avg <= 40
       puts "\nRipening! Keep practicing. Your average critic rating difference is #{avg}."
     end
-
   end
 
   def list_movies()
-    puts "All Movies:"
-    puts MovieEntries.all
-    #can update this to var = MovieEntries.all; then have access to entries and movie and make this message whatever
+    entries = MovieEntries.all
+    puts "Movies in your library:"
+    entries.each do |entry|
+      puts "#{entry.title}=> id: #{entry.id}, seen: #{entry.seen}, own: #{entry.own}, wishlist see: #{entry.wishlist_see}, wishlist own: #{entry.wishlist_own}, your rating: #{entry.user_rating}, rt critic tomato meter: #{entry.movie.tomato_meter}"
+    end
   end
 
   def search_movie_entries_for(search_term)
