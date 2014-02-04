@@ -93,6 +93,12 @@ class MovieEntries
     end
   end
 
+  def delete attribute
+    database = Environment.database_connection
+    database.execute("delete from movie_entries where id = #{id}")
+  end
+
+
   def to_s
     "#{title}: seen #{seen}, own #{own}, wishlist see #{wishlist_see}, wishlist own #{wishlist_own}, user rating: #{user_rating}, id: #{id}"
   end
