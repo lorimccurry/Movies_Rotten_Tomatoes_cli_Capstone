@@ -3,7 +3,7 @@ require 'sqlite3'
 
 class TestEditingMovies < MovieTest
   def test_updating_a_record_that_exists
-    movie_entry = MovieEntries.create(title: "Gravity", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75")
+    movie_entry = MovieEntries.create(title: "Once", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75")
     id =  movie_entry.id
     command = "./movie edit --id #{id} -t 'American Hustle' -s t -o t --ws f --wo f -r 85 --environment test"
     expected = "Movie entry #{id} is now named American Hustle, with seen true, own true, wishlist see false, wishlist own false, user rating 85"
