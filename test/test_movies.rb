@@ -1,5 +1,4 @@
 require_relative 'helper'
-require_relative '../models/movie'
 
 class TestMovies < MovieTest
   def test_movies_are_created_if_needed

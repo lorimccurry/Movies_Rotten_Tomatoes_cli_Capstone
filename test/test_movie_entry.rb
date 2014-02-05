@@ -1,5 +1,4 @@
 require_relative 'helper'
-require_relative '../models/movie_entries'
 
 class TestMovieEntries < MovieTest
   def test_to_s_prints_details
