@@ -1,18 +1,29 @@
 require_relative 'helper'
 
 class TestMovies < MovieTest
-  def test_movies_are_created_if_needed
-    foos_before = database.execute("select count(id) from movies")[0][0]
+  def test_count_when_no_categories
+    assert_equal 0, Movie.count
+  end
+
+  def test_count_of_multiple_movies
+    Movie.find_or_create(title: "Gravity", year: "2013", rated: "PG-13", runtime: "91 min", genre: "Drama, Sci-Fi, Thriller", tomato_meter: "97", tomato_image: "certified", tomato_user_meter: "85", released: "04 Oct 2013", dvd: "25 Feb 2014", production: "Warner Bros. Pictures", box_office: "$254.6M")
     Movie.find_or_create(title: "Up", year: "2009", rated: "PG", runtime: "96 min", genre: "Animation, Adventure, Drama", tomato_meter: "98", tomato_image: "certified", tomato_user_meter: "89", released: "29 May 2009", dvd: "10 Nov 2009", production: "Walt Disney Pictures", box_office: "$293.0M")
-    foos_after = database.execute("select count(id) from movies")[0][0]
+    Movie.find_or_create(title: "Erin Brockovich", year: "2000", rated: "R", runtime: "131 min", genre: "Biography, Drama", tomato_meter: "84", tomato_image: "certified", tomato_user_meter: "80", released: "17 Mar 2000", dvd: "15 Aug 200", production: "Universal Pictures", box_office: "N/A")
+    assert_equal 3, Movie.count
+  end
+
+  def test_movies_are_created_if_needed
+    foos_before = Movie.count
+    Movie.find_or_create(title: "Up", year: "2009", rated: "PG", runtime: "96 min", genre: "Animation, Adventure, Drama", tomato_meter: "98", tomato_image: "certified", tomato_user_meter: "89", released: "29 May 2009", dvd: "10 Nov 2009", production: "Walt Disney Pictures", box_office: "$293.0M")
+    foos_after = Movie.count
     assert_equal foos_before + 1, foos_after
   end
 
   def test_movies_are_not_created_if_they_already_exist
     Movie.find_or_create(title: "Gravity", year: "2013", rated: "PG-13", runtime: "91 min", genre: "Drama, Sci-Fi, Thriller", tomato_meter: "97", tomato_image: "certified", tomato_user_meter: "85", released: "04 Oct 2013", dvd: "25 Feb 2014", production: "Warner Bros. Pictures", box_office: "$254.6M")
-    foos_before = database.execute("select count(id) from movies")[0][0]
+    foos_before = Movie.count
     Movie.find_or_create(title: "Gravity", year: "2013", rated: "PG-13", runtime: "91 min", genre: "Drama, Sci-Fi, Thriller", tomato_meter: "97", tomato_image: "certified", tomato_user_meter: "85", released: "04 Oct 2013", dvd: "25 Feb 2014", production: "Warner Bros. Pictures", box_office: "$254.6M")
-    foos_after = database.execute("select count(id) from movies")[0][0]
+    foos_after = Movie.count
     assert_equal foos_before, foos_after
   end
 

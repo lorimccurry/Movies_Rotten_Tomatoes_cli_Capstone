@@ -1,6 +1,17 @@
 require_relative 'helper'
 
 class TestMovieEntries < MovieTest
+  def test_count_when_no_movie_entries
+    assert_equal 0, MovieEntries.count
+  end
+
+  def test_count_of_multiple_movie_entries
+    MovieEntries.create(title: "Gravity", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75")
+    MovieEntries.create(title: "Up", seen: 0, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "67")
+    MovieEntries.create(title: "Jaws", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "84")
+    assert_equal 3, MovieEntries.count
+  end
+
   def test_to_s_prints_details
     movie = Movie.find_or_create(title: "Up", year: "2009", rated: "PG", runtime: "96 min", genre: "Animation, Adventure, Drama", tomato_meter: "98", tomato_image: "certified", tomato_user_meter: "89", released: "29 May 2009", dvd: "10 Nov 2009", production: "Walt Disney Pictures", box_office: "$293.0M")
     movie_entry = MovieEntries.create(title: "Up", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75")
@@ -11,9 +22,9 @@ class TestMovieEntries < MovieTest
 
   def test_update_doesnt_insert_new_row
     movie_entry = MovieEntries.create(title: "Foo", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75")
-    foos_before = database.execute("select count(id) from movie_entries")[0][0]
+    foos_before = MovieEntries.count
     movie_entry.update(name: "Bar")
-    foos_after = database.execute("select count(id) from movie_entries")[0][0]
+    foos_after = MovieEntries.count
     assert_equal foos_before, foos_after
   end
 
@@ -37,9 +48,9 @@ class TestMovieEntries < MovieTest
 
   def test_saved_movie_entries_are_saved
     movie_entry = MovieEntries.new(title: "Foo", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75")
-    foos_before = database.execute("select count(id) from movie_entries")[0][0]
+    foos_before = MovieEntries.count
     movie_entry.save
-    foos_after = database.execute("select count(id) from movie_entries")[0][0]
+    foos_after = MovieEntries.count
     assert_equal foos_before + 1, foos_after
   end
 

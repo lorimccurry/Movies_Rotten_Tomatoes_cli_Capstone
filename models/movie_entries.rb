@@ -14,6 +14,11 @@ class MovieEntries
     @user_rating = user_rating
   end
 
+  def self.count
+    database = Environment.database_connection
+    database.execute("select count(id) from movie_entries")[0][0]
+  end
+
   def self.create(attributes = {})
     movie_entry = MovieEntries.new(attributes)
     movie_entry.save

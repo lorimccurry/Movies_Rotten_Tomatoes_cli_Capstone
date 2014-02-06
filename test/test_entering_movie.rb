@@ -9,14 +9,12 @@ class TestEnteringMovies < MovieTest
     expected = ["Good Will Hunting", 1, 1, 1, 1, "100"]
     assert_equal expected, results[0]
 
-    result = database.execute("select count(id) from movie_entries")
-    assert_equal 1, result[0][0]
+    assert_equal 1, MovieEntries.count
   end
 
   def test_02_invalid_movie_doesnt_get_saved
     `./movie add -s "t" -o "t" --wo "t" -r 100`
-    result = database.execute("select count(id) from movie_entries")
-    assert_equal 0, result[0][0]
+    assert_equal 0, MovieEntries.count
   end
 
   def test_03_error_message_for_missing_title
@@ -32,8 +30,7 @@ class TestEnteringMovies < MovieTest
     expected = ["Good Will Hunting", 0, 1, 1, 1, "100"]
     assert_equal expected, results[0]
 
-    result = database.execute("select count(id) from movie_entries")
-    assert_equal 1, result[0][0]
+    assert_equal 1, MovieEntries.count
   end
 
   def test_05_missing_own_defaults_false
@@ -43,8 +40,7 @@ class TestEnteringMovies < MovieTest
     expected = ["Good Will Hunting", 1, 0, 1, 1, "100"]
     assert_equal expected, results[0]
 
-    result = database.execute("select count(id) from movie_entries")
-    assert_equal 1, result[0][0]
+    assert_equal 1, MovieEntries.count
   end
 
   def test_06_missing_wishlist_see_defaults_false
@@ -54,8 +50,7 @@ class TestEnteringMovies < MovieTest
     expected = ["Good Will Hunting", 1, 1, 0, 1, "100"]
     assert_equal expected, results[0]
 
-    result = database.execute("select count(id) from movie_entries")
-    assert_equal 1, result[0][0]
+    assert_equal 1, MovieEntries.count
   end
 
   def test_07_missing_wishlist_own_defaults_false
@@ -65,8 +60,7 @@ class TestEnteringMovies < MovieTest
     expected = ["Good Will Hunting", 1, 1, 1, 0, "100"]
     assert_equal expected, results[0]
 
-    result = database.execute("select count(id) from movie_entries")
-    assert_equal 1, result[0][0]
+    assert_equal 1, MovieEntries.count
   end
 
   def test_08_rating_defaults_to_none
@@ -76,8 +70,7 @@ class TestEnteringMovies < MovieTest
     expected = ["Good Will Hunting", 1, 1, 1, 1, "none"]
     assert_equal expected, results[0]
 
-    result = database.execute("select count(id) from movie_entries")
-    assert_equal 1, result[0][0]
+    assert_equal 1, MovieEntries.count
   end
 
   def test_09_valid_movie_information_gets_printed
