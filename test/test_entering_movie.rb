@@ -2,17 +2,16 @@ require_relative 'helper'
 require 'sqlite3'
 
 class TestEnteringMovies < MovieTest
-  def test_01_valid_movie_gets_saved
+  def test_01_valid_movie_entry_gets_saved
     `./movie add 'Good Will Hunting' -s "t" -o "t" --ws "t" --wo "t" -r 100 --environment test`
-    database.results_as_hash = false
-    results = database.execute("select title, seen, own, wishlist_see, wishlist_own, user_rating from movie_entries")
-    expected = ["Good Will Hunting", 1, 1, 1, 1, "100"]
-    assert_equal expected, results[0]
-
+    movie_entry = MovieEntries.all.first
+    expected = ["Good Will Hunting", true, true, true, true, "100"]
+    actual = [movie_entry.title, movie_entry.seen, movie_entry.own, movie_entry.wishlist_see, movie_entry.wishlist_own, movie_entry.user_rating]
+    assert_equal expected, actual
     assert_equal 1, MovieEntries.count
   end
 
-  def test_02_invalid_movie_doesnt_get_saved
+  def test_02_invalid_movie_entry_doesnt_get_saved
     `./movie add -s "t" -o "t" --wo "t" -r 100`
     assert_equal 0, MovieEntries.count
   end

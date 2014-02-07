@@ -12,6 +12,11 @@ class TestMovieEntries < MovieTest
     assert_equal 3, MovieEntries.count
   end
 
+  def test_movie_defaults_to_unknown
+    movie_entry = MovieEntries.create(title: "Gravity", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75")
+    assert_equal "Unknown", movie_entry.movie.title
+  end
+
   def test_to_s_prints_details
     movie = Movie.find_or_create(title: "Up", year: "2009", rated: "PG", runtime: "96 min", genre: "Animation, Adventure, Drama", tomato_meter: "98", tomato_image: "certified", tomato_user_meter: "89", released: "29 May 2009", dvd: "10 Nov 2009", production: "Walt Disney Pictures", box_office: "$293.0M")
     movie_entry = MovieEntries.create(title: "Up", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75")
@@ -62,7 +67,7 @@ class TestMovieEntries < MovieTest
   def test_save_saves_movie_id
     movie = Movie.find_or_create(title: "Up", year: "2009", rated: "PG", runtime: "96 min", genre: "Animation, Adventure, Drama", tomato_meter: "98", tomato_image: "certified", tomato_user_meter: "89", released: "29 May 2009", dvd: "10 Nov 2009", production: "Walt Disney Pictures", box_office: "$293.0M")
     movie_entry = MovieEntries.create(title: "Up", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75", movie: movie)
-    movie_id = database.execute("select movie_id from movie_entries where id='#{movie_entry.id}'")[0][0]
+    movie_id = MovieEntries.find(movie_entry.id).movie.id
     assert_equal movie.id, movie_id, "Movie.id and movie_entry.movie_id should be the same"
   end
 
@@ -72,7 +77,7 @@ class TestMovieEntries < MovieTest
     movie_entry = MovieEntries.create(title: "Up", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75", movie: movie1)
     movie_entry.movie = movie2
     movie_entry.save
-    movie_id = database.execute("select movie_id from movie_entries where id='#{movie_entry.id}'")[0][0]
+    movie_id = MovieEntries.find(movie_entry.id).movie.id
     assert_equal movie2.id, movie_id, "Movie2.id and movie_entry.movie_id should be the same"
   end
 
@@ -80,14 +85,28 @@ class TestMovieEntries < MovieTest
     assert_nil MovieEntries.find(12345)
   end
 
-  def test_find_returns_the_row_as_purchase_object
-    movie_entry = MovieEntries.create(title: "Foo", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75")
+  def test_find_returns_the_row_as_movie_entry_object
+    movie = Movie.find_or_create(title: "Up", year: "2009", rated: "PG", runtime: "96 min", genre: "Animation, Adventure, Drama", tomato_meter: "98", tomato_image: "certified", tomato_user_meter: "89", released: "29 May 2009", dvd: "10 Nov 2009", production: "Walt Disney Pictures", box_office: "$293.0M")
+    movie_entry = MovieEntries.create(title: "Up", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75")
     found = MovieEntries.find(movie_entry.id)
     assert_equal movie_entry.title, found.title
     assert_equal movie_entry.id, found.id
+    assert_equal movie_entry.seen, found.seen
+    assert_equal movie_entry.own, found.own
+    assert_equal movie_entry.wishlist_see, found.wishlist_see
+    assert_equal movie_entry.wishlist_own, found.wishlist_own
+    assert_equal movie_entry.user_rating, found.user_rating
   end
 
-  def test_search_returns_purchase_objects
+  def test_find_results_the_movie_entry_with_correct_movie
+    movie = Movie.find_or_create(title: "Up", year: "2009", rated: "PG", runtime: "96 min", genre: "Animation, Adventure, Drama", tomato_meter: "98", tomato_image: "certified", tomato_user_meter: "89", released: "29 May 2009", dvd: "10 Nov 2009", production: "Walt Disney Pictures", box_office: "$293.0M")
+    movie_entry = MovieEntries.create(title: "Up", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75", movie: movie)
+    found = MovieEntries.find(movie_entry.id)
+    refute_equal Movie.default.id, found.movie.id
+    assert_equal movie.id, found.movie.id
+  end
+
+  def test_search_returns_movie_entry_objects
     MovieEntries.create(title: "Erin Brocovich", seen: 1, own: 0, wishlist_see: 1, wishlist_own: 1, user_rating: "42")
     MovieEntries.create(title: "Good Will Hunting", seen: 0, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "67")
     MovieEntries.create(title: "A Good Year", seen: 1, own: 1, wishlist_see: 1, wishlist_own: 0, user_rating: "n/a")

@@ -4,6 +4,10 @@ class Movie
   attr_accessor :title, :year, :rated, :runtime, :genre, :tomato_meter, :tomato_image, :tomato_user_meter, :released, :dvd, :production, :box_office
   attr_reader :id
 
+  def self.default
+    @@default ||= Movie.find_or_create(title: "Unknown")
+  end
+
   def initialize attributes = {}
     update_attributes(attributes)
   end

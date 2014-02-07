@@ -1,13 +1,12 @@
 # require_relative '../lib/environment'
 # require 'sqlite3'
-
-
 class MovieEntries
   attr_accessor :title, :seen, :own, :wishlist_see, :wishlist_own, :user_rating, :movie
   attr_reader :id
 
   def initialize attributes = {}
     update_attributes(attributes)
+    self.movie ||= Movie.default
   end
 
   def user_rating=(user_rating)
@@ -48,7 +47,9 @@ class MovieEntries
     database.results_as_hash = true
     results = database.execute("select * from movie_entries where id = #{id}")[0]
     if results
-      movie_entry = MovieEntries.new(title: results["title"], seen: results["seen"], own: results["own"], wishlist_see: results["wishlist_see"], wishlist_own: results["wishlist_own"], user_rating: results["user_rating"])
+      #This is not idea. We should be using a find method
+      movie = Movie.all.find{ |movie| movie.id == results["movie_id"] }
+      movie_entry = MovieEntries.new(title: results["title"], seen: results["seen"], own: results["own"], wishlist_see: results["wishlist_see"], wishlist_own: results["wishlist_own"], user_rating: results["user_rating"], movie: movie)
       movie_entry.send("id=", results["id"])
       movie_entry
     else
