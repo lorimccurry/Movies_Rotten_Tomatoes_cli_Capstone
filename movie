@@ -14,8 +14,6 @@ class MovieScript
   end
 
   def main
-    database = Environment.database_connection
-
     if options[:command] == "search"
       search_term = ask("What do you want to search for?")
       search_movie_entries_for(search_term)
