@@ -18,7 +18,7 @@ class TestMovieEntries < MovieTest
   end
 
   def test_to_s_prints_details
-    movie = Movie.find_or_create(title: "Up", year: "2009", rated: "PG", runtime: "96 min", genre: "Animation, Adventure, Drama", tomato_meter: "98", tomato_image: "certified", tomato_user_meter: "89", released: "29 May 2009", dvd: "10 Nov 2009", production: "Walt Disney Pictures", box_office: "$293.0M")
+    movie = Movie.find_or_create_by(title: "Up", year: "2009", rated: "PG", runtime: "96 min", genre: "Animation, Adventure, Drama", tomato_meter: "98", tomato_image: "certified", tomato_user_meter: "89", released: "29 May 2009", dvd: "10 Nov 2009", production: "Walt Disney Pictures", box_office: "$293.0M")
     movie_entry = MovieEntries.create(title: "Up", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75")
     # movie_entry = MovieEntries.new(movie: movie, seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75")
     expected = "Up: seen true, own false, wishlist see false, wishlist own true, user rating: 75, id: #{movie_entry.id}"
@@ -28,7 +28,7 @@ class TestMovieEntries < MovieTest
   def test_update_doesnt_insert_new_row
     movie_entry = MovieEntries.create(title: "Foo", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75")
     foos_before = MovieEntries.count
-    movie_entry.update(name: "Bar")
+    movie_entry.update(title: "Bar")
     foos_after = MovieEntries.count
     assert_equal foos_before, foos_after
   end
@@ -65,15 +65,15 @@ class TestMovieEntries < MovieTest
   end
 
   def test_save_saves_movie_id
-    movie = Movie.find_or_create(title: "Up", year: "2009", rated: "PG", runtime: "96 min", genre: "Animation, Adventure, Drama", tomato_meter: "98", tomato_image: "certified", tomato_user_meter: "89", released: "29 May 2009", dvd: "10 Nov 2009", production: "Walt Disney Pictures", box_office: "$293.0M")
+    movie = Movie.find_or_create_by(title: "Up", year: "2009", rated: "PG", runtime: "96 min", genre: "Animation, Adventure, Drama", tomato_meter: "98", tomato_image: "certified", tomato_user_meter: "89", released: "29 May 2009", dvd: "10 Nov 2009", production: "Walt Disney Pictures", box_office: "$293.0M")
     movie_entry = MovieEntries.create(title: "Up", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75", movie: movie)
     movie_id = MovieEntries.find(movie_entry.id).movie.id
     assert_equal movie.id, movie_id, "Movie.id and movie_entry.movie_id should be the same"
   end
 
   def test_save_update_movie_id
-    movie1 = Movie.find_or_create(title: "Up", year: "2009", rated: "PG", runtime: "96 min", genre: "Animation, Adventure, Drama", tomato_meter: "98", tomato_image: "certified", tomato_user_meter: "89", released: "29 May 2009", dvd: "10 Nov 2009", production: "Walt Disney Pictures", box_office: "$293.0M")
-    movie2 = Movie.find_or_create(title: "Gravity", year: "2013", rated: "PG-13", runtime: "91 min", genre: "Drama, Sci-Fi, Thriller", tomato_meter: "97", tomato_image: "certified", tomato_user_meter: "85", released: "04 Oct 2013", dvd: "25 Feb 2014", production: "Warner Bros. Pictures", box_office: "$254.6M")
+    movie1 = Movie.find_or_create_by(title: "Up", year: "2009", rated: "PG", runtime: "96 min", genre: "Animation, Adventure, Drama", tomato_meter: "98", tomato_image: "certified", tomato_user_meter: "89", released: "29 May 2009", dvd: "10 Nov 2009", production: "Walt Disney Pictures", box_office: "$293.0M")
+    movie2 = Movie.find_or_create_by(title: "Gravity", year: "2013", rated: "PG-13", runtime: "91 min", genre: "Drama, Sci-Fi, Thriller", tomato_meter: "97", tomato_image: "certified", tomato_user_meter: "85", released: "04 Oct 2013", dvd: "25 Feb 2014", production: "Warner Bros. Pictures", box_office: "$254.6M")
     movie_entry = MovieEntries.create(title: "Up", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75", movie: movie1)
     movie_entry.movie = movie2
     movie_entry.save
@@ -81,12 +81,8 @@ class TestMovieEntries < MovieTest
     assert_equal movie2.id, movie_id, "Movie2.id and movie_entry.movie_id should be the same"
   end
 
-  def test_find_returns_nil_if_unfindable
-    assert_nil MovieEntries.find(12345)
-  end
-
   def test_find_returns_the_row_as_movie_entry_object
-    movie = Movie.find_or_create(title: "Up", year: "2009", rated: "PG", runtime: "96 min", genre: "Animation, Adventure, Drama", tomato_meter: "98", tomato_image: "certified", tomato_user_meter: "89", released: "29 May 2009", dvd: "10 Nov 2009", production: "Walt Disney Pictures", box_office: "$293.0M")
+    movie = Movie.find_or_create_by(title: "Up", year: "2009", rated: "PG", runtime: "96 min", genre: "Animation, Adventure, Drama", tomato_meter: "98", tomato_image: "certified", tomato_user_meter: "89", released: "29 May 2009", dvd: "10 Nov 2009", production: "Walt Disney Pictures", box_office: "$293.0M")
     movie_entry = MovieEntries.create(title: "Up", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75")
     found = MovieEntries.find(movie_entry.id)
     assert_equal movie_entry.title, found.title
@@ -99,7 +95,7 @@ class TestMovieEntries < MovieTest
   end
 
   def test_find_results_the_movie_entry_with_correct_movie
-    movie = Movie.find_or_create(title: "Up", year: "2009", rated: "PG", runtime: "96 min", genre: "Animation, Adventure, Drama", tomato_meter: "98", tomato_image: "certified", tomato_user_meter: "89", released: "29 May 2009", dvd: "10 Nov 2009", production: "Walt Disney Pictures", box_office: "$293.0M")
+    movie = Movie.find_or_create_by(title: "Up", year: "2009", rated: "PG", runtime: "96 min", genre: "Animation, Adventure, Drama", tomato_meter: "98", tomato_image: "certified", tomato_user_meter: "89", released: "29 May 2009", dvd: "10 Nov 2009", production: "Walt Disney Pictures", box_office: "$293.0M")
     movie_entry = MovieEntries.create(title: "Up", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75", movie: movie)
     found = MovieEntries.find(movie_entry.id)
     refute_equal Movie.default.id, found.movie.id

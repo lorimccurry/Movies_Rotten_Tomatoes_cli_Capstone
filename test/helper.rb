@@ -4,15 +4,13 @@ require_relative '../lib/environment'
 class MovieTest < Minitest::Unit::TestCase
   def setup
     Environment.environment = "test"
-  end
-
-  def database
-    Environment.database_connection
+    Environment.connect_to_database
   end
 
   def teardown
-    database.execute("delete from movie_entries")
-    database.execute("delete from movies")
+    #The database cleaner gem will do this for us
+    Movie.destroy_all
+    MovieEntries.destroy_all
   end
 
   def assert_command_output expected, command

@@ -73,7 +73,7 @@ class TestEnteringMovies < MovieTest
   end
 
   def test_09_valid_movie_information_gets_printed
-    Movie.find_or_create(title: "American Hustle", year: "2013", rated: "R", runtime: "138 min", genre: "Crime, Drama", tomato_meter: "92", tomato_image: "certified", tomato_user_meter: "81", released: "20 Dec 2013", dvd: "N/A", production: "Sony Pictures", box_office: "$87.9M")
+    Movie.find_or_create_by(title: "American Hustle", year: "2013", rated: "R", runtime: "138 min", genre: "Crime, Drama", tomato_meter: "92", tomato_image: "certified", tomato_user_meter: "81", released: "20 Dec 2013", dvd: "N/A", production: "Sony Pictures", box_office: "$87.9M")
     command = "./movie add 'American Hustle' -s t -o --ws --wo t -r 80"
     expected = "A movie named American Hustle, with seen? true, own? false, wishlist see false, wishlist own true, user rating 80, released in 2013, rated R, runtime 138 min, genre Crime, Drama, tomato meter 92, released by Sony Pictures with a box office of $87.9M was created"
     assert_command_output expected, command

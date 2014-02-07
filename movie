@@ -90,7 +90,7 @@ class MovieScript
   def add_movie_entry
     error_messages = ArgumentParser.validate(options)
     if error_messages.empty?
-      movie = Movie.find_or_create(title: options[:title])
+      movie = Movie.find_or_create_by(title: options[:title])
       movie_entry = MovieEntries.new(options)
       movie_entry.movie = movie
       movie_entry.save
