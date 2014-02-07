@@ -1,4 +1,5 @@
 class Movie < ActiveRecord::Base
+  # belongs_to :movie_entry
   default_scope { order("title ASC") }
 
   def self.default

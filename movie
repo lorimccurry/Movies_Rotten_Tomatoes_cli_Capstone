@@ -11,31 +11,34 @@ class MovieScript
   def initialize
     @options = ArgumentParser.parse
     Environment.environment = @options[:environment] || "production"
+    @options.delete(:environment)
   end
 
   def main
-    if options[:command] == "search"
+    Environment.connect_to_database
+    command = options.delete(:command)
+    if command == "search"
       search_term = ask("What do you want to search for?")
       search_movie_entries_for(search_term)
-    elsif options[:command] == "add"
+    elsif command == "add"
       add_movie_entry()
-    elsif options[:command] == "list"
+    elsif command == "list"
       list_movies()
-    elsif options[:command] == "all"
+    elsif command == "all"
       list_all_movies()
-    elsif options[:command] == "edit"
-      if movie_entry = MovieEntries.find(options[:id])
+    elsif command == "edit"
+      if movie_entry = MovieEntries.find_by(id: options[:id])
         movie_entry.update(options)
         puts "Movie entry #{movie_entry.id} is now named #{movie_entry.title}, with seen #{movie_entry.seen}, own #{movie_entry.own}, wishlist see #{movie_entry.wishlist_see}, wishlist own #{movie_entry.wishlist_own}, user rating #{movie_entry.user_rating}"
       else
         puts "Movie entry #{options[:id]} couldn't be found"
       end
-    elsif options[:command] == "ratings_compare"
+    elsif command == "ratings_compare"
       compare_ratings()
-    elsif options[:command] == "delete"
+    elsif command == "delete"
       if movie_entry = MovieEntries.find(options[:id])
-        movie_entry.delete(options)
         puts "'#{movie_entry.title}' => id: #{movie_entry.id}, seen: #{movie_entry.seen}, own: #{movie_entry.own}, wishlist see: #{movie_entry.wishlist_see}, wishlist own: #{movie_entry.wishlist_own}, your rating: #{movie_entry.user_rating} has been cut"
+        movie_entry.destroy
       else
         puts "Movie #{options[:id]} isn't in your library"
       end
@@ -47,21 +50,21 @@ class MovieScript
   def compare_ratings()
     entries = MovieEntries.compare_ratings
     puts "*****Ratings Compare: Can I move to L.A., yet?*****\n\n"
-    total = 0
-    entries.each do |entry|
-      diff = entry.user_rating.to_i - entry.movie.tomato_meter.to_i
-      pos_diff = diff < 0 ? diff * (-1) : diff
-      total += pos_diff
-      puts "'#{entry.title}',  your rating: #{entry.user_rating},  rt critic rating: #{entry.movie.tomato_meter}"
-    end
-    avg = (total / entries.count)
-    if avg > 40
-      puts "\nSplat! Your taste sucks. Your average critic rating difference is #{avg}."
-    elsif avg <= 15
-      puts "\nFresh! Quit your day job and move to Hollywood. Your average critic rating difference is #{avg}."
-    elsif avg > 15 && avg <= 40
-      puts "\nRipening! Eat more popcorn. Your average critic rating difference is #{avg}."
-    end
+    # total = 0
+    # entries.each do |entry|
+    #   diff = entry.user_rating.to_i - entry.movie.tomato_meter.to_i
+    #   pos_diff = diff < 0 ? diff * (-1) : diff
+    #   total += pos_diff
+    #   puts "'#{entry.title}',  your rating: #{entry.user_rating},  rt critic rating: #{entry.movie.tomato_meter}"
+    # end
+    # avg = (total / entries.count)
+    # if avg > 40
+    #   puts "\nSplat! Your taste sucks. Your average critic rating difference is #{avg}."
+    # elsif avg <= 15
+    #   puts "\nFresh! Quit your day job and move to Hollywood. Your average critic rating difference is #{avg}."
+    # elsif avg > 15 && avg <= 40
+    #   puts "\nRipening! Eat more popcorn. Your average critic rating difference is #{avg}."
+    # end
   end
 
   def list_movies()

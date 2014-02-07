@@ -24,50 +24,50 @@ class TestEnteringMovies < MovieTest
 
   def test_04_missing_seen_defaults_false
     `./movie add 'Good Will Hunting' -o "t" -s --ws "t" --wo "t" -r 100 --environment test`
-    database.results_as_hash = false
-    results = database.execute("select title, seen, own, wishlist_see, wishlist_own, user_rating from movie_entries")
-    expected = ["Good Will Hunting", 0, 1, 1, 1, "100"]
-    assert_equal expected, results[0]
+    movie_entry = MovieEntries.last
+    actual = [movie_entry.title, movie_entry.seen, movie_entry.own, movie_entry.wishlist_see, movie_entry.wishlist_own, movie_entry.user_rating]
+    expected = ["Good Will Hunting", false, true, true, true, "100"]
+    assert_equal expected, actual
 
     assert_equal 1, MovieEntries.count
   end
 
   def test_05_missing_own_defaults_false
     `./movie add 'Good Will Hunting' -s "t" -o --wo "t" --ws "t" -r 100 --environment test`
-    database.results_as_hash = false
-    results = database.execute("select title, seen, own, wishlist_see, wishlist_own, user_rating from movie_entries")
-    expected = ["Good Will Hunting", 1, 0, 1, 1, "100"]
-    assert_equal expected, results[0]
+    movie_entry = MovieEntries.last
+    actual = [movie_entry.title, movie_entry.seen, movie_entry.own, movie_entry.wishlist_see, movie_entry.wishlist_own, movie_entry.user_rating]
+    expected = ["Good Will Hunting", true, false, true, true, "100"]
+    assert_equal expected, actual
 
     assert_equal 1, MovieEntries.count
   end
 
   def test_06_missing_wishlist_see_defaults_false
     `./movie add 'Good Will Hunting' -s "t" -o "t" --ws --wo "t" -r 100 --environment test`
-    database.results_as_hash = false
-    results = database.execute("select title, seen, own, wishlist_see, wishlist_own, user_rating from movie_entries")
-    expected = ["Good Will Hunting", 1, 1, 0, 1, "100"]
-    assert_equal expected, results[0]
+    movie_entry = MovieEntries.last
+    actual = [movie_entry.title, movie_entry.seen, movie_entry.own, movie_entry.wishlist_see, movie_entry.wishlist_own, movie_entry.user_rating]
+    expected = ["Good Will Hunting", true, true, false, true, "100"]
+    assert_equal expected, actual
 
     assert_equal 1, MovieEntries.count
   end
 
   def test_07_missing_wishlist_own_defaults_false
     `./movie add 'Good Will Hunting' -s "t" -o "t" --ws "t" --wo -r 100 --environment test`
-    database.results_as_hash = false
-    results = database.execute("select title, seen, own, wishlist_see, wishlist_own, user_rating from movie_entries")
-    expected = ["Good Will Hunting", 1, 1, 1, 0, "100"]
-    assert_equal expected, results[0]
+    movie_entry = MovieEntries.last
+    actual = [movie_entry.title, movie_entry.seen, movie_entry.own, movie_entry.wishlist_see, movie_entry.wishlist_own, movie_entry.user_rating]
+    expected = ["Good Will Hunting", true, true, true, false, "100"]
+    assert_equal expected, actual
 
     assert_equal 1, MovieEntries.count
   end
 
   def test_08_rating_defaults_to_none
     `./movie add 'Good Will Hunting' -s "t" -o "t" --ws "t" --wo "t" --environment test`
-    database.results_as_hash = false
-    results = database.execute("select title, seen, own, wishlist_see, wishlist_own, user_rating from movie_entries")
-    expected = ["Good Will Hunting", 1, 1, 1, 1, "none"]
-    assert_equal expected, results[0]
+    movie_entry = MovieEntries.last
+    actual = [movie_entry.title, movie_entry.seen, movie_entry.own, movie_entry.wishlist_see, movie_entry.wishlist_own, movie_entry.user_rating]
+    expected = ["Good Will Hunting", true, true, true, true, "none"]
+    assert_equal expected, actual
 
     assert_equal 1, MovieEntries.count
   end
