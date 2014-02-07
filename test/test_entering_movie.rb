@@ -1,19 +1,19 @@
 require_relative 'helper'
 require 'sqlite3'
 
-class TestEnteringMovies < MovieTest
+class TestEnteringMovie < MovieTest
   def test_01_valid_movie_entry_gets_saved
     `./movie add 'Good Will Hunting' -s "t" -o "t" --ws "t" --wo "t" -r 100 --environment test`
-    movie_entry = MovieEntries.all.first
+    movie_entry = MovieEntry.all.first
     expected = ["Good Will Hunting", true, true, true, true, "100"]
     actual = [movie_entry.title, movie_entry.seen, movie_entry.own, movie_entry.wishlist_see, movie_entry.wishlist_own, movie_entry.user_rating]
     assert_equal expected, actual
-    assert_equal 1, MovieEntries.count
+    assert_equal 1, MovieEntry.count
   end
 
   def test_02_invalid_movie_entry_doesnt_get_saved
     `./movie add -s "t" -o "t" --wo "t" -r 100`
-    assert_equal 0, MovieEntries.count
+    assert_equal 0, MovieEntry.count
   end
 
   def test_03_error_message_for_missing_title
@@ -24,52 +24,52 @@ class TestEnteringMovies < MovieTest
 
   def test_04_missing_seen_defaults_false
     `./movie add 'Good Will Hunting' -o "t" -s --ws "t" --wo "t" -r 100 --environment test`
-    movie_entry = MovieEntries.last
+    movie_entry = MovieEntry.last
     actual = [movie_entry.title, movie_entry.seen, movie_entry.own, movie_entry.wishlist_see, movie_entry.wishlist_own, movie_entry.user_rating]
     expected = ["Good Will Hunting", false, true, true, true, "100"]
     assert_equal expected, actual
 
-    assert_equal 1, MovieEntries.count
+    assert_equal 1, MovieEntry.count
   end
 
   def test_05_missing_own_defaults_false
     `./movie add 'Good Will Hunting' -s "t" -o --wo "t" --ws "t" -r 100 --environment test`
-    movie_entry = MovieEntries.last
+    movie_entry = MovieEntry.last
     actual = [movie_entry.title, movie_entry.seen, movie_entry.own, movie_entry.wishlist_see, movie_entry.wishlist_own, movie_entry.user_rating]
     expected = ["Good Will Hunting", true, false, true, true, "100"]
     assert_equal expected, actual
 
-    assert_equal 1, MovieEntries.count
+    assert_equal 1, MovieEntry.count
   end
 
   def test_06_missing_wishlist_see_defaults_false
     `./movie add 'Good Will Hunting' -s "t" -o "t" --ws --wo "t" -r 100 --environment test`
-    movie_entry = MovieEntries.last
+    movie_entry = MovieEntry.last
     actual = [movie_entry.title, movie_entry.seen, movie_entry.own, movie_entry.wishlist_see, movie_entry.wishlist_own, movie_entry.user_rating]
     expected = ["Good Will Hunting", true, true, false, true, "100"]
     assert_equal expected, actual
 
-    assert_equal 1, MovieEntries.count
+    assert_equal 1, MovieEntry.count
   end
 
   def test_07_missing_wishlist_own_defaults_false
     `./movie add 'Good Will Hunting' -s "t" -o "t" --ws "t" --wo -r 100 --environment test`
-    movie_entry = MovieEntries.last
+    movie_entry = MovieEntry.last
     actual = [movie_entry.title, movie_entry.seen, movie_entry.own, movie_entry.wishlist_see, movie_entry.wishlist_own, movie_entry.user_rating]
     expected = ["Good Will Hunting", true, true, true, false, "100"]
     assert_equal expected, actual
 
-    assert_equal 1, MovieEntries.count
+    assert_equal 1, MovieEntry.count
   end
 
   def test_08_rating_defaults_to_none
     `./movie add 'Good Will Hunting' -s "t" -o "t" --ws "t" --wo "t" --environment test`
-    movie_entry = MovieEntries.last
+    movie_entry = MovieEntry.last
     actual = [movie_entry.title, movie_entry.seen, movie_entry.own, movie_entry.wishlist_see, movie_entry.wishlist_own, movie_entry.user_rating]
     expected = ["Good Will Hunting", true, true, true, true, "none"]
     assert_equal expected, actual
 
-    assert_equal 1, MovieEntries.count
+    assert_equal 1, MovieEntry.count
   end
 
   def test_09_valid_movie_information_gets_printed

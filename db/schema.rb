@@ -11,31 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20140205021800) do
 
   create_table "movie_entries", force: true do |t|
-    t.string  "title",        limit: 100
+    t.string  "title"
     t.boolean "seen"
     t.boolean "own"
     t.boolean "wishlist_see"
     t.boolean "wishlist_own"
-    t.string  "user_rating",  limit: 3
+    t.string  "user_rating"
     t.integer "movie_id"
   end
 
   create_table "movies", force: true do |t|
-    t.string  "title",             limit: 100
+    t.string  "title"
     t.integer "year"
-    t.string  "rated",             limit: 10
-    t.string  "runtime",           limit: 20
-    t.string  "genre",             limit: 100
+    t.string  "rated"
+    t.string  "runtime"
+    t.string  "genre"
     t.integer "tomato_meter"
-    t.string  "tomato_image",      limit: 10
+    t.string  "tomato_image"
     t.integer "tomato_user_meter"
-    t.string  "released",          limit: 20
-    t.string  "dvd",               limit: 20
-    t.string  "production",        limit: 50
-    t.string  "box_office",        limit: 10
+    t.string  "released"
+    t.string  "dvd"
+    t.string  "production"
+    t.string  "box_office"
   end
 
 end

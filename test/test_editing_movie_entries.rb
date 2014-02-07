@@ -1,9 +1,9 @@
 require_relative 'helper'
 require 'sqlite3'
 
-class TestEditingMovies < MovieTest
+class TestEditingMovieEntries < MovieTest
   def test_updating_a_record_that_exists
-    movie_entry = MovieEntries.create(title: "Once", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75")
+    movie_entry = MovieEntry.create(title: "Once", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75")
     id =  movie_entry.id
     command = "./movie edit --id #{id} -t 'American Hustle' -s t -o t --ws f --wo f -r 85 --environment test"
     expected = "Movie entry #{id} is now named American Hustle, with seen true, own true, wishlist see false, wishlist own false, user rating 85"
@@ -17,7 +17,7 @@ class TestEditingMovies < MovieTest
   end
 
   def test_attempting_to_update_with_no_changes
-    movie_entry = MovieEntries.new(title: "Gravity", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75")
+    movie_entry = MovieEntry.new(title: "Gravity", seen: 1, own: 0, wishlist_see: 0, wishlist_own: 1, user_rating: "75")
     movie_entry.save
     id =  movie_entry.id
     command = "./movie edit --id #{id} -t Gravity -s t -o f --ws f --wo t -r 75"
@@ -26,7 +26,7 @@ class TestEditingMovies < MovieTest
 
   def test_attempting_to_update_with_bad_data
     skip
-    movie_entry = MovieEntries.new(title: "Gravity", seen: "t", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "75")
+    movie_entry = MovieEntry.new(title: "Gravity", seen: "t", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "75")
     movie_entry.save
     id =  movie_entry.id
     command = "./movie edit --id #{id} -t Gravity -s t -o f --ws f --wo t -r million"
@@ -36,7 +36,7 @@ class TestEditingMovies < MovieTest
 
   def test_attempting_to_update_partial_data
     skip
-    movie_entry = MovieEntries.new(title: "Gravity", seen: "t", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "75")
+    movie_entry = MovieEntry.new(title: "Gravity", seen: "t", own: "f", wishlist_see: "f", wishlist_own: "t", user_rating: "75")
     movie_entry.save
     id =  movie_entry.id
     command = "./movie edit --id#{id} --title Gravity!"

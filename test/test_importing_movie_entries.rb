@@ -8,7 +8,7 @@ class TestImportingMovieEntries < MovieTest
 
   def test_the_correct_number_of_movie_entries_are_imported
     import_data
-    assert_equal 5, MovieEntries.all.count
+    assert_equal 5, MovieEntry.all.count
   end
 
   def test_movie_entries_are_imported_fully
@@ -20,7 +20,7 @@ class TestImportingMovieEntries < MovieTest
       "Up, true, false, false, true, 95",
       "When Harry Met Sally, true, true, false, false, 90",
     ]
-    actual = MovieEntries.all.map do |movie_entry|
+    actual = MovieEntry.all.map do |movie_entry|
       "#{movie_entry.title}, #{movie_entry.seen}, #{movie_entry.own}, #{movie_entry.wishlist_see}, #{movie_entry.wishlist_own}, #{movie_entry.user_rating}"
     end
     assert_equal expected, actual

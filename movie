@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require_relative 'lib/environment'
 require_relative 'lib/argument_parser'
-require_relative 'models/movie_entries'
+require_relative 'models/movie_entry'
 require_relative 'lib/interactions'
 #Router
 class MovieScript
@@ -27,7 +27,7 @@ class MovieScript
     elsif command == "all"
       list_all_movies()
     elsif command == "edit"
-      if movie_entry = MovieEntries.find_by(id: options[:id])
+      if movie_entry = MovieEntry.find_by(id: options[:id])
         movie_entry.update(options)
         puts "Movie entry #{movie_entry.id} is now named #{movie_entry.title}, with seen #{movie_entry.seen}, own #{movie_entry.own}, wishlist see #{movie_entry.wishlist_see}, wishlist own #{movie_entry.wishlist_own}, user rating #{movie_entry.user_rating}"
       else
@@ -36,7 +36,7 @@ class MovieScript
     elsif command == "ratings_compare"
       compare_ratings()
     elsif command == "delete"
-      if movie_entry = MovieEntries.find(options[:id])
+      if movie_entry = MovieEntry.find(options[:id])
         puts "'#{movie_entry.title}' => id: #{movie_entry.id}, seen: #{movie_entry.seen}, own: #{movie_entry.own}, wishlist see: #{movie_entry.wishlist_see}, wishlist own: #{movie_entry.wishlist_own}, your rating: #{movie_entry.user_rating} has been cut"
         movie_entry.destroy
       else
@@ -48,7 +48,7 @@ class MovieScript
   end
 
   def compare_ratings()
-    entries = MovieEntries.compare_ratings
+    entries = MovieEntry.compare_ratings
     puts "*****Ratings Compare: Can I move to L.A., yet?*****\n\n"
     # total = 0
     # entries.each do |entry|
@@ -68,7 +68,7 @@ class MovieScript
   end
 
   def list_movies()
-    entries = MovieEntries.all
+    entries = MovieEntry.all
     puts "Movies in your library:"
     entries.each do |entry|
       puts "#{entry.title}=> id: #{entry.id}, seen: #{entry.seen}, own: #{entry.own}, wishlist see: #{entry.wishlist_see}, wishlist own: #{entry.wishlist_own}, your rating: #{entry.user_rating}, rt critic tomato meter: #{entry.movie.tomato_meter}"
@@ -85,14 +85,14 @@ class MovieScript
 
   def search_movie_entries_for(search_term)
     puts "You asked for: #{search_term}"
-    puts MovieEntries.search(search_term)
+    puts MovieEntry.search(search_term)
   end
 
   def add_movie_entry
     error_messages = ArgumentParser.validate(options)
     if error_messages.empty?
       movie = Movie.find_or_create_by(title: options[:title])
-      movie_entry = MovieEntries.new(options)
+      movie_entry = MovieEntry.new(options)
       movie_entry.movie = movie
       movie_entry.save
       puts "A movie named #{movie_entry.title}, with seen? #{movie_entry.seen}, own? #{movie_entry.own}, wishlist see #{movie_entry.wishlist_see}, wishlist own #{movie_entry.wishlist_own}, user rating #{movie_entry.user_rating}, released in #{movie_entry.movie.year}, rated #{movie_entry.movie.rated}, runtime #{movie_entry.movie.runtime}, genre #{movie_entry.movie.genre}, tomato meter #{movie_entry.movie.tomato_meter}, released by #{movie_entry.movie.production} with a box office of #{movie_entry.movie.box_office} was created"

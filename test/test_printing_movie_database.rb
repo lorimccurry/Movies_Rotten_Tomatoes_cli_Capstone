@@ -1,6 +1,6 @@
 require_relative 'helper'
 
-class TestListingMovies < MovieTest
+class TestPrintingMovieDatabase < MovieTest
   def test_01_test_returns_relevant_results
     good_will_hunting = Movie.find_or_create_by(title: "Good Will Hunting", year: "1997", rated: "R", runtime: "126 min", genre: "Drama", tomato_meter: "97", tomato_image: "certified", tomato_user_meter: "94", released: "09 Jan 1998", dvd: "08 Dec 1998", production: "Miramax", box_office: "N/A")
     a_good_year = Movie.find_or_create_by(title: "A Good Year", year: "2006", rated: "PG-13", runtime: "117 min", genre: "Comedy, Drama, Romance", tomato_meter: "25", tomato_image: "rotten", tomato_user_meter: "65", released: "10 Nov 2006", dvd: "27 Feb 2007", production: "20th Century Fox", box_office: "$7.4M")

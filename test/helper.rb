@@ -10,7 +10,7 @@ class MovieTest < Minitest::Unit::TestCase
   def teardown
     #The database cleaner gem will do this for us
     Movie.destroy_all
-    MovieEntries.destroy_all
+    MovieEntry.destroy_all
   end
 
   def assert_command_output expected, command

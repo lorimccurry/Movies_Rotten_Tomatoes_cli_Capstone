@@ -7,7 +7,7 @@ class CreateMovieEntries < ActiveRecord::Migration
       t.boolean :wishlist_see
       t.boolean :wishlist_own
       t.string :user_rating
-      t.integer :movie_id
+      t.belongs_to :movie
     end
   end
 end

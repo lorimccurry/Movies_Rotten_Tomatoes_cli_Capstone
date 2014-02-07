@@ -10,7 +10,7 @@ class Importer
     movie = Movie.find_or_create_by(
       title: row_hash["title"], year: row_hash["year"], rated: row_hash["rated"], runtime:row_hash["runtime"], genre: row_hash["genre"], tomato_meter: row_hash["tomato_meter"], tomato_image: row_hash["tomato_image"], tomato_user_meter: row_hash["tomato_user_meter"], released: row_hash["released"], dvd: row_hash["dvd"], production: row_hash["production"], box_office: row_hash["box_office"]
       )
-    movie_entry = MovieEntries.create(
+    movie_entry = MovieEntry.create(
       title: row_hash["title"],
       seen: row_hash["seen"],
       own: row_hash["own"],
